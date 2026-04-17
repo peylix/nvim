@@ -72,3 +72,6 @@ o.clipboard = "unnamedplus" -- use system clipboard
 
 -- use xclip for clipboard on Linux
 if vim.fn.has("linux") == 1 then vim.g.clipboard = "xclip" end
+
+-- use ~/.config/spell/en.utf-8.add
+o.spellfile = vim.fn.stdpath("config") .. "/spell/en.utf-8.add"

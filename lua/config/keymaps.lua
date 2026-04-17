@@ -30,9 +30,11 @@ map({ "n", "t" }, "<C-j>", "<C-w>j", { desc = "Down window" })
 map({ "n", "t" }, "<C-k>", "<C-w>k", { desc = "Up window" })
 map({ "n", "t" }, "<C-l>", "<C-w>l", { desc = "Right window" })
 
-map("n", "|", "<cmd>vsplit<cr>", { desc = "Vertical split" })
-map("n", "\\", "<cmd>split<cr>", { desc = "Horizontal split" })
+map("n", "|", "<cmd>vsplit<CR>", { desc = "Vertical split" })
+map("n", "\\", "<cmd>split<CR>", { desc = "Horizontal split" })
 
+-- Close buffer
+map("n", "<leader>c", "<cmd>bdelete<CR>", { noremap = true, silent = true })
 
 Config.leader_group_clues = {
   { mode = "n", keys = "<Leader>b", desc = "+Buffer" },
