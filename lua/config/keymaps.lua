@@ -1,0 +1,79 @@
+local map = vim.keymap.set
+
+-- Paste linewise before or after current line
+map("n", "[p", '<Cmd>exe "iput! " . v:register<CR>', { desc = "Paste Above" })
+map("n", "]p", '<Cmd>exe "iput " . v:register<CR>', { desc = "Paste Below" })
+
+-- Move to the end of the line if this is the last line
+map({ "n", "x" }, "j", function()
+  return vim.fn.line(".") == vim.fn.line("$") and "$" or "j"
+end, { expr = true, noremap = true, desc = "Move to EOL on last line, else move down" })
+
+-- Move to the beginning of the line if this is the first line
+map({ "n", "x" }, "k", function()
+  return vim.fn.line(".") == 1 and "0" or "k"
+end, { expr = true, noremap = true, desc = "Move to BOL on first line, else move up" })
+
+-- Remapping keybindings for moving to the end of line
+map({ "n", "x" }, "-", "$", { noremap = true, desc = "Move to end of line" })
+
+-- <leader>/ for commenting the current line or the selected area
+map("n", "<leader>/", "gcc", { remap = true, desc = "Toggle comment line" })
+map("x", "<leader>/", "gc", { remap = true, desc = "Toggle comment selection" })
+
+-- Clear search highlights after pressing <Esc>
+map("n", "<Esc>", "<cmd>nohlsearch<CR><Esc>", { desc = "Clear search highlight" })
+
+-- Window related operations
+map({ "n", "t" }, "<C-h>", "<C-w>h", { desc = "Left window" })
+map({ "n", "t" }, "<C-j>", "<C-w>j", { desc = "Down window" })
+map({ "n", "t" }, "<C-k>", "<C-w>k", { desc = "Up window" })
+map({ "n", "t" }, "<C-l>", "<C-w>l", { desc = "Right window" })
+
+map("n", "|", "<cmd>vsplit<cr>", { desc = "Vertical split" })
+map("n", "\\", "<cmd>split<cr>", { desc = "Horizontal split" })
+
+
+Config.leader_group_clues = {
+  { mode = "n", keys = "<Leader>b", desc = "+Buffer" },
+  { mode = "n", keys = "<Leader>e", desc = "+Explore/Edit" },
+  { mode = "n", keys = "<Leader>f", desc = "+Find" },
+  { mode = "n", keys = "<Leader>g", desc = "+Git" },
+  { mode = "n", keys = "<Leader>l", desc = "+Language" },
+  { mode = "n", keys = "<Leader>o", desc = "+Other" },
+  { mode = "n", keys = "<Leader>s", desc = "+Session" },
+  { mode = "n", keys = "<Leader>t", desc = "+Terminal" },
+  { mode = "x", keys = "<Leader>g", desc = "+Git" },
+  { mode = "x", keys = "<Leader>l", desc = "+Language" },
+}
+
+-- Mini.Files
+map("n", "<Leader>ed", "<Cmd>lua MiniFiles.open()<CR>", { desc = "Directory" })
+map(
+  "n",
+  "<Leader>ee",
+  "<Cmd>lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<CR>",
+  { desc = "File directory" }
+)
+map("n", "<Leader>eq", function()
+  vim.cmd(vim.fn.getqflist({ winid = true }).winid ~= 0 and "cclose" or "copen")
+end, { desc = "Quickfix list" })
+map("n", "<Leader>el", function()
+  vim.cmd(vim.fn.getloclist(0, { winid = true }).winid ~= 0 and "lclose" or "lopen")
+end, { desc = "Location list" })
+
+-- buffer_manager.nvim
+map("n", "<Leader>bb", function()
+  require("buffer_manager.ui").toggle_quick_menu()
+end, { desc = "View all buffers" })
+map("n", "]b", function()
+  require("buffer_manager.ui").nav_next()
+end, { desc = "Next buffer in buffer manager list" })
+map("n", "[b", function()
+  require("buffer_manager.ui").nav_prev()
+end, { desc = "Previous buffer in buffer manager list" })
+
+-- Language related
+map("n", "<leader>lf", function()
+  require("conform").format({ async = true, lsp_fallback = true })
+end, { desc = "Format this buffer" })

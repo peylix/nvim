@@ -1,0 +1,8 @@
+require('plugins.language')
+require('plugins.mini')
+require('plugins.snacks')
+require('plugins.editing')
+require('plugins.display')
+require('plugins.ai')
+require('plugins.git')
+require('plugins.misc')
