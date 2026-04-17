@@ -34,7 +34,15 @@ map("n", "|", "<cmd>vsplit<CR>", { desc = "Vertical split" })
 map("n", "\\", "<cmd>split<CR>", { desc = "Horizontal split" })
 
 -- Close buffer
-map("n", "<leader>c", "<cmd>bdelete<CR>", { noremap = true, silent = true })
+map(
+  "n",
+  "<leader>c",
+  "<cmd>bdelete<CR>",
+  { noremap = true, silent = true, desc = "Close buffer" }
+)
+
+-- Back to normal mode in terminal
+map("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 Config.leader_group_clues = {
   { mode = "n", keys = "<Leader>b", desc = "+Buffer" },

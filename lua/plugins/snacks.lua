@@ -47,6 +47,7 @@ snacks.setup({
       enabled = false,
     },
   },
+  -- TODO: properly managing the terminal buffers
   terminal = {
     enabled = true,
     bo = {
@@ -245,12 +246,15 @@ end, { desc = "LSP Workspace Symbols" })
 map("n", "<leader>gi", function()
   Snacks.picker.gh_issue()
 end, { desc = "GitHub Issues (open)" })
+
 map("n", "<leader>gI", function()
   Snacks.picker.gh_issue({ state = "all" })
 end, { desc = "GitHub Issues (all)" })
+
 map("n", "<leader>gq", function()
   Snacks.picker.gh_pr()
 end, { desc = "GitHub Pull Requests (open)" })
+
 map("n", "<leader>gQ", function()
   Snacks.picker.gh_pr({ state = "all" })
 end, { desc = "GitHub Pull Requests (all)" })
@@ -258,6 +262,7 @@ end, { desc = "GitHub Pull Requests (all)" })
 map("n", "<leader>bt", function()
   Snacks.scratch()
 end, { desc = "Toggle Scratch Buffer" })
+
 map("n", "<leader>bT", function()
   Snacks.scratch.select()
 end, { desc = "Select Scratch Buffer" })
@@ -266,12 +271,14 @@ map("n", "<leader>bS", function()
   Snacks.scratch.select()
 end, { desc = "Select Scratch Buffer" })
 
--- Toggle terminal
-map("n", "<leader>tt", function()
+map("n", "<leader>tn", function()
   Snacks.terminal.open()
+end, { desc = "New terminal" })
+
+map("n", "<leader>tt", function()
+  Snacks.terminal.toggle()
 end, { desc = "Toggle terminal" })
 
--- List terminals
 map("n", "<leader>tl", function()
   Snacks.terminal.list()
 end, { desc = "List terminal" })
