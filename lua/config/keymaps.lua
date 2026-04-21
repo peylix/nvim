@@ -42,7 +42,7 @@ map(
 )
 
 -- Back to normal mode in terminal
-map("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+map("t", "<C-Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 Config.leader_group_clues = {
   { mode = "n", keys = "<Leader>b", desc = "+Buffer" },
