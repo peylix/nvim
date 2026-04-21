@@ -25,5 +25,5 @@ map(
   neogit_config(function()
     require("neogit").open()
   end),
-  {desc="Show Neogit UI"}
+  { desc = "Show Neogit UI" }
 )

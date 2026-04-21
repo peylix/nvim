@@ -69,17 +69,18 @@ snacks.setup({
         end
       end,
       term_normal = {
-        "<esc>",
-        function(self)
-          self.esc_timer = self.esc_timer or (vim.uv or vim.loop).new_timer()
-          if self.esc_timer:is_active() then
-            self.esc_timer:stop()
-            vim.cmd("stopinsert")
-          else
-            self.esc_timer:start(200, 0, function() end)
-            return "<esc>"
-          end
-        end,
+        -- "<esc>",
+        -- function(self)
+        --   self.esc_timer = self.esc_timer or (vim.uv or vim.loop).new_timer()
+        --   if self.esc_timer:is_active() then
+        --     self.esc_timer:stop()
+        --     vim.cmd("stopinsert")
+        --   else
+        --     self.esc_timer:start(200, 0, function() end)
+        --     return "<esc>"
+        --   end
+        -- end,
+        "<C-Esc>",
         mode = "t",
         expr = true,
         desc = "Double escape to normal mode",
