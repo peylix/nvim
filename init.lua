@@ -45,5 +45,4 @@ require("config.colorschemes")
 require("config.options")
 require("config.keymaps")
 require("config.misc")
-
 require("plugins")

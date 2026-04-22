@@ -95,3 +95,10 @@ end, { desc = "Previous buffer in buffer manager list" })
 map("n", "<leader>lf", function()
   require("conform").format({ async = true, lsp_fallback = true })
 end, { desc = "Format this buffer" })
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local opts = { buffer = args.buf, desc = "LSP Rename Symbol" }
+    vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, opts)
+  end,
+})

@@ -7,6 +7,7 @@ Config.on_packchanged("nvim-treesitter", { "update" }, ts_update, ":TSUpdate")
 vim.pack.add({
   "https://github.com/nvim-treesitter/nvim-treesitter",
   "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
+  "https://github.com/nvim-treesitter/nvim-treesitter-context"
 })
 
 -- nvim-lspconfig
