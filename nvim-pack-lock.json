@@ -117,6 +117,10 @@
       "rev": "ad9ede6a9cddf16cedbd31b8932d6dcdee9b716e",
       "src": "https://github.com/folke/snacks.nvim"
     },
+    "todo-comments.nvim": {
+      "rev": "31e3c38ce9b29781e4422fc0322eb0a21f4e8668",
+      "src": "https://github.com/folke/todo-comments.nvim"
+    },
     "vim-startuptime": {
       "rev": "f10474b400c197787a0434548d842a2db583c333",
       "src": "https://github.com/dstein64/vim-startuptime"

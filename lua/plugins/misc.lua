@@ -7,7 +7,7 @@ vim.pack.add({
 require("buffer_manager").setup({})
 
 -- im-select.nvim
--- must have macism installed
+-- NOTE: make sure macism is installed
 if Config.profile_is_default and vim.fn.has("mac") == 1 then
   vim.pack.add({ "https://github.com/keaising/im-select.nvim" })
 
