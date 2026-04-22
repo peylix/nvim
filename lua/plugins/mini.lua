@@ -12,6 +12,9 @@ require("mini.icons").setup({
   end,
 })
 
+-- Mock mock_nvim_web_devicons
+require("mini.icons").mock_nvim_web_devicons()
+
 require("mini.files").setup({
   options = {
     permanent_delete = false, -- Delete files permanently when deleting. By default files are deleted to OS's trash bin

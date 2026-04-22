@@ -6,30 +6,245 @@ vim.pack.add({
   "https://github.com/nvim-lualine/lualine.nvim",
 })
 
-local function lsp_clients()
-  local clients = vim.lsp.get_clients({ bufnr = 0 })
-  if #clients == 0 then return "" end
-  local names = {}
-  for _, client in ipairs(clients) do
-    table.insert(names, client.name)
-  end
-  return " " .. table.concat(names, ", ")
-end
+-- This is based on Eviline config for lualine
+local lualine = require("lualine")
 
--- use mini.icons instead of nvim-web-devicons
--- ensure mini.icons is enabled before this plugin.
-require("mini.icons").mock_nvim_web_devicons()
+-- Color table for highlights
+-- stylua: ignore
+local colors = {
+  bg       = '#070c30',
+  fg       = '#bbc2cf',
+  yellow   = '#ECBE7B',
+  cyan     = '#008080',
+  darkblue = '#081633',
+  green    = '#98be65',
+  orange   = '#FF8800',
+  violet   = '#a9a1e1',
+  magenta  = '#c678dd',
+  blue     = '#51afef',
+  red      = '#ec5f67',
+}
 
-require("lualine").setup({
-  sections = {
-    lualine_x = {
-      lsp_clients,
-      "encoding",
-      "fileformat",
-      "filetype",
+local conditions = {
+  buffer_not_empty = function()
+    return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
+  end,
+  hide_in_width = function()
+    return vim.fn.winwidth(0) > 80
+  end,
+  check_git_workspace = function()
+    local filepath = vim.fn.expand("%:p:h")
+    local gitdir = vim.fn.finddir(".git", filepath .. ";")
+    return gitdir and #gitdir > 0 and #gitdir < #filepath
+  end,
+}
+
+local config = {
+  options = {
+    -- Disable sections and component separators
+    component_separators = "",
+    section_separators = "",
+    theme = {
+      -- We are going to use lualine_c an lualine_x as left and
+      -- right section. Both are highlighted by c theme.  So we
+      -- are just setting default looks o statusline
+      normal = { c = { fg = colors.fg, bg = colors.bg } },
+      inactive = { c = { fg = colors.fg, bg = colors.bg } },
     },
   },
+  sections = {
+    -- these are to remove the defaults
+    lualine_a = {},
+    lualine_b = {},
+    lualine_y = {},
+    lualine_z = {},
+    -- These will be filled later
+    lualine_c = {},
+    lualine_x = {},
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {
+      {
+        "filename",
+        cond = conditions.buffer_not_empty,
+        color = { fg = colors.magenta, gui = "bold" },
+      },
+    },
+    lualine_x = {
+      {
+        "location",
+        color = { fg = colors.fg, gui = "bold" },
+      },
+    },
+    lualine_y = {},
+    lualine_z = {},
+  },
+}
+
+-- Inserts a component in lualine_c at left section
+local function ins_left(component)
+  table.insert(config.sections.lualine_c, component)
+end
+
+-- Inserts a component in lualine_x at right section
+local function ins_right(component)
+  table.insert(config.sections.lualine_x, component)
+end
+
+ins_left({
+  function()
+    local mode_map = {
+      n = "NO", -- Normal mode
+      no = "OP", -- Operator-pending mode
+      nov = "OP",
+      noV = "OP",
+      ["no\22"] = "OP",
+
+      i = "IN", -- Insert mode
+
+      v = "VI", -- Visual charactor mode
+      V = "VL", -- Visual line mode
+      [""] = "VB", -- Visual block mode
+
+      c = "CM", -- Command-line mode
+
+      R = "RE", -- Replace mode
+      Rv = "VR", -- Virtual replace
+
+      s = "SE", -- Select mode
+      S = "SL", -- Select line mode
+      [""] = "SB", -- Select block mode
+
+      t = "TE", -- Terminal mode
+    }
+
+    return mode_map[vim.fn.mode()] or "?"
+  end,
+
+  color = function()
+    local mode_color = {
+      n = colors.fg,
+      no = colors.fg,
+      nov = colors.fg,
+      noV = colors.fg,
+      ["no\22"] = colors.fg,
+
+      i = colors.green,
+
+      v = colors.blue,
+      V = colors.blue,
+      [""] = colors.blue,
+
+      c = colors.magenta,
+
+      R = colors.violet,
+      Rv = colors.violet,
+
+      s = colors.orange,
+      S = colors.orange,
+      [""] = colors.orange,
+
+      t = colors.red,
+    }
+
+    return {
+      fg = mode_color[vim.fn.mode()] or colors.fg,
+      gui = "bold",
+    }
+  end,
+
+  padding = { left = 1, right = 1 },
 })
+
+-- ins_left({
+--   -- filesize component
+--   "filesize",
+--   cond = conditions.buffer_not_empty,
+-- })
+
+ins_left({
+  "filename",
+  cond = conditions.buffer_not_empty,
+  color = { fg = colors.magenta, gui = "bold" },
+})
+
+ins_left({ "location" })
+
+ins_left({ "progress", color = { fg = colors.fg, gui = "bold" } })
+
+ins_left({
+  "diagnostics",
+  sources = { "nvim_diagnostic" },
+  symbols = { error = " ", warn = " ", info = " " },
+  diagnostics_color = {
+    error = { fg = colors.red },
+    warn = { fg = colors.yellow },
+    info = { fg = colors.cyan },
+  },
+})
+
+-- Insert mid section
+-- for lualine it's any number greater then 2
+ins_left({
+  function()
+    return "%="
+  end,
+})
+
+ins_left({
+  -- Lsp server name
+  function()
+    local msg = "No Active Lsp"
+    local buf_ft = vim.api.nvim_get_option_value("filetype", { buf = 0 })
+    local clients = vim.lsp.get_clients()
+    if next(clients) == nil then return msg end
+    for _, client in ipairs(clients) do
+      local filetypes = client.config.filetypes
+      if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then return client.name end
+    end
+    return msg
+  end,
+  icon = " LSP:",
+  color = { fg = "#ffffff", gui = "bold" },
+})
+
+-- Add components to right sections
+ins_right({
+  "o:encoding",
+  fmt = string.upper,
+  cond = conditions.hide_in_width,
+  color = { fg = colors.green, gui = "bold" },
+})
+
+ins_right({
+  "fileformat",
+  fmt = string.upper,
+  icons_enabled = false,
+  color = { fg = colors.green, gui = "bold" },
+})
+
+ins_right({
+  "branch",
+  icon = "",
+  color = { fg = colors.violet, gui = "bold" },
+})
+
+ins_right({
+  "diff",
+  symbols = { added = " ", modified = "󰝤 ", removed = " " },
+  diff_color = {
+    added = { fg = colors.green },
+    modified = { fg = colors.orange },
+    removed = { fg = colors.red },
+  },
+  cond = conditions.hide_in_width,
+  padding = { right = 1 },
+})
+
+-- initialize lualine
+lualine.setup(config)
 
 -- comfy-line-numbers.nvim
 vim.pack.add({ "https://github.com/mluders/comfy-line-numbers.nvim" })

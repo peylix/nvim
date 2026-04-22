@@ -34,6 +34,8 @@ o.splitkeep = "screen"
 o.splitright = true -- reduce splits should be placed to the right
 o.winborder = "single" -- use border in floating windows
 o.wrap = false -- do not visually wrap lines -- TODO: ?
+o.cmdheight = 0
+o.laststatus = 2
 
 o.cursorlineopt = "screenline,number" -- show cursor line per screen line
 
