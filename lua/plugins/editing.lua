@@ -224,3 +224,97 @@ map(
   end),
   { desc = "Next word start" }
 )
+
+-- dial.nvim
+local function dial(fn)
+  return function()
+    vim.pack.add({ "https://github.com/monaqa/dial.nvim" })
+    local augend = require("dial.augend")
+    require("dial.config").augends:register_group({
+      -- default augends used when no group name is specified
+      default = {
+        augend.integer.alias.decimal, -- nonnegative decimal number
+        augend.integer.alias.hex, -- nonnegative hex number
+        augend.constant.alias.bool, -- boolean value (true <-> false)
+        -- date (2022/02/19, etc.)
+        augend.date.new({
+          pattern = "%Y/%m/%d",
+          default_kind = "day",
+        }),
+      },
+    })
+    fn()
+  end
+end
+
+map(
+  "n",
+  "<C-a>",
+  dial(function()
+    require("dial.map").manipulate("increment", "normal")
+  end),
+  { desc = "Increase this" }
+)
+
+map(
+  "n",
+  "<C-x>",
+  dial(function()
+    require("dial.map").manipulate("decrement", "normal")
+  end),
+  { desc = "Decrease this" }
+)
+
+map(
+  "n",
+  "g<C-a>",
+  dial(function()
+    require("dial.map").manipulate("increment", "gnormal")
+  end),
+  { desc = "Increase this" }
+)
+
+map(
+  "n",
+  "g<C-x>",
+  dial(function()
+    require("dial.map").manipulate("decrement", "gnormal")
+  end),
+  { desc = "Decrease this" }
+)
+
+map(
+  "x",
+  "<C-a>",
+  dial(function()
+    require("dial.map").manipulate("increment", "visual")
+  end),
+  { desc = "Increase this" }
+)
+
+map(
+  "x",
+  "<C-x>",
+  dial(function()
+    require("dial.map").manipulate("decrement", "visual")
+  end),
+  { desc = "Decrease this" }
+)
+
+map(
+  "x",
+  "g<C-a>",
+  dial(function()
+    require("dial.map").manipulate("increment", "gvisual")
+  end),
+  { desc = "Increase this" }
+)
+
+map(
+  "x",
+  "g<C-x>",
+  dial(function()
+    require("dial.map").manipulate("decrement", "gvisual")
+  end),
+  { desc = "Decrease this" }
+)
