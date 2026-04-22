@@ -64,8 +64,9 @@ local miniclue = require("mini.clue")
         delay = 0,
     },
     clues = {
-      -- This is defined in 'plugin/20_keymaps.lua' with Leader group descriptions
+      -- This is defined in 'keymaps.lua' with Leader group descriptions
       Config.leader_group_clues,
+      Config.localleader_group_clues,
       miniclue.gen_clues.builtin_completion(),
       miniclue.gen_clues.g(),
       miniclue.gen_clues.marks(),
@@ -83,6 +84,7 @@ local miniclue = require("mini.clue")
     -- Explicitly opt-in for set of common keys to trigger clue window
     triggers = {
       { mode = { 'n', 'x' }, keys = '<Leader>' }, -- Leader triggers
+      { mode = { 'n', 'x' }, keys = '<localleader>' }, -- Leader triggers
       { mode =   'n',        keys = '\\' },       -- mini.basics
       { mode = { 'n', 'x' }, keys = ']' },
       { mode =   'i',        keys = '<C-x>' },    -- Built-in completion

@@ -19,6 +19,7 @@ local address_default = "127.0.0.1:5567"
 -- listens on the specified [address]
 -- if no [address] is provided, `address_default` will be used.
 -- connect to the server with `nvim --server [address] --remote-ui`
+-- or with `:connect [address]`
 vim.api.nvim_create_user_command("ServerStart", function(opts)
   local address = opts.args ~= "" and opts.args or address_default
   vim.fn.jobstart({ "nvim", "--listen", address, "--headless" }, { detach = true })

@@ -33,6 +33,10 @@ map({ "n", "t" }, "<C-l>", "<C-w>l", { desc = "Right window" })
 map("n", "|", "<cmd>vsplit<CR>", { desc = "Vertical split" })
 map("n", "\\", "<cmd>split<CR>", { desc = "Horizontal split" })
 
+-- Use tab for indent
+map("v", "<Tab>", ">gv", { noremap = true, silent = true, desc = "Indent selection" })
+map("v", "<S-Tab>", "<gv", { noremap = true, silent = true, desc = "Outdent selection" })
+
 -- Close buffer
 map(
   "n",
@@ -55,6 +59,10 @@ Config.leader_group_clues = {
   { mode = "n", keys = "<Leader>t", desc = "+Terminal" },
   { mode = "x", keys = "<Leader>g", desc = "+Git" },
   { mode = "x", keys = "<Leader>l", desc = "+Language" },
+}
+
+Config.localleader_group_clues = {
+  { mode = "n", keys = "<localleader>l", desc = "+VimTex" },
 }
 
 -- Mini.Files
