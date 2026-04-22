@@ -105,6 +105,10 @@
       "rev": "ad9ede6a9cddf16cedbd31b8932d6dcdee9b716e",
       "src": "https://github.com/folke/snacks.nvim"
     },
+    "vimtex": {
+      "rev": "0f42a5130432d4af2e6fd21fb93a76915ff1f090",
+      "src": "https://github.com/lervag/vimtex"
+    },
     "yorumi.nvim": {
       "rev": "e5b93e2c0adb3d95ca9f3c5c20e824d15afcfe48",
       "src": "https://github.com/yorumicolors/yorumi.nvim"

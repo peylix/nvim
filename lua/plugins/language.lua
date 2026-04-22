@@ -35,9 +35,9 @@ vim.diagnostic.config({
   signs = {
     text = {
       [vim.diagnostic.severity.ERROR] = "󰅚",
-      [vim.diagnostic.severity.WARN]  = "󰀪",
-      [vim.diagnostic.severity.INFO]  = "󰋽",
-      [vim.diagnostic.severity.HINT]  = "󰌶",
+      [vim.diagnostic.severity.WARN] = "󰀪",
+      [vim.diagnostic.severity.INFO] = "󰋽",
+      [vim.diagnostic.severity.HINT] = "󰌶",
     },
   },
 })
@@ -76,3 +76,12 @@ require("conform").setup({
     python = { "ruff" },
   },
 })
+
+-- VimTex
+vim.pack.add({ "https://github.com/lervag/vimtex" })
+
+vim.g.vimtex_view_method = "skim"
+-- Snacks integration
+vim.keymap.set("n", "<localleader>lt", function()
+  return require("vimtex.snacks").toc()
+end, { desc = "Search in VimTex" })
