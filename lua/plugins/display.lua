@@ -167,7 +167,7 @@ ins_left({
 ins_left({
   "filename",
   cond = conditions.buffer_not_empty,
-  color = { fg = colors.magenta, gui = "bold" },
+  color = { fg = colors.blue, gui = "bold" },
 })
 
 ins_left({ "location" })
