@@ -167,9 +167,7 @@ ins_left({
 ins_left({
   function()
     local reg = vim.fn.reg_recording()
-    if reg ~= "" then
-      return "Recording @" .. reg
-    end
+    if reg ~= "" then return "Recording @" .. reg end
     return ""
   end,
   color = { fg = colors.red, gui = "bold" },
@@ -389,4 +387,8 @@ end, { desc = "Previous todo comment" })
 
 -- fidget.nvim
 vim.pack.add({ "https://github.com/j-hui/fidget.nvim" })
-require("fidget").setup()
+require("fidget").setup({
+  notification = {
+    override_vim_notify = true,
+  },
+})
