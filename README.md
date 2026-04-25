@@ -4,7 +4,7 @@ My personal Neovim config.
 
 ## Dependencies
 
-1. Neovim 0.12+
+1. Neovim 0.12+ (required by `vim.pack`, `ui2`, etc.)
 2. Git
 3. ripgrep
 4. Node.js & npm
