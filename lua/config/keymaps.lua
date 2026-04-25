@@ -1,8 +1,8 @@
 local map = vim.keymap.set
 
 -- Paste linewise before or after current line
-map("n", "[p", '<Cmd>exe "iput! " . v:register<CR>', { desc = "Paste Above" })
-map("n", "]p", '<Cmd>exe "iput " . v:register<CR>', { desc = "Paste Below" })
+map("n", "[p", '<cmd>exe "iput! " . v:register<CR>', { desc = "Paste Above" })
+map("n", "]p", '<cmd>exe "iput " . v:register<CR>', { desc = "Paste Below" })
 
 -- Move to the end of the line if this is the last line
 map({ "n", "x" }, "j", function()
@@ -48,6 +48,9 @@ map(
 -- Back to normal mode in terminal
 map("t", "<C-Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
+-- Restart Neovim
+map("n", "<leader>or", "<cmd>restart<CR>", {noremap=true, silent=true, desc="Restart Neovim"})
+
 Config.leader_group_clues = {
   { mode = "n", keys = "<Leader>a", desc = "+AI" },
   { mode = "n", keys = "<Leader>b", desc = "+Buffer" },
@@ -65,11 +68,11 @@ Config.localleader_group_clues = {
 }
 
 -- Mini.Files
-map("n", "<Leader>ed", "<Cmd>lua MiniFiles.open()<CR>", { desc = "Directory" })
+map("n", "<leader>ed", "<lmd>lua MiniFiles.open()<CR>", { desc = "Directory" })
 map(
   "n",
-  "<Leader>ee",
-  "<Cmd>lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<CR>",
+  "<leader>ee",
+  "<cmd>lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<CR>",
   { desc = "File directory" }
 )
 map("n", "<Leader>eq", function()

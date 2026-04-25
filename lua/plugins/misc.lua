@@ -27,6 +27,16 @@ require("buffer_manager").setup({
   },
 })
 
+map("n", "<Leader>bb", function()
+  require("buffer_manager.ui").toggle_quick_menu()
+end, { desc = "View all buffers" })
+map("n", "]b", function()
+  require("buffer_manager.ui").nav_next()
+end, { desc = "Next buffer in buffer manager list" })
+map("n", "[b", function()
+  require("buffer_manager.ui").nav_prev()
+end, { desc = "Previous buffer in buffer manager list" })
+
 ---- Navigate buffers bypassing the menu
 local keys = "1234567890"
 for i = 1, #keys do

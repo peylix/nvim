@@ -24,6 +24,14 @@ require("mini.files").setup({
   },
 })
 
+map("n", "<leader>ed", "<lmd>lua MiniFiles.open()<CR>", { desc = "Directory" })
+map(
+  "n",
+  "<leader>ee",
+  "<cmd>lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<CR>",
+  { desc = "File directory" }
+)
+
 local minitrailspace = require("mini.trailspace")
 minitrailspace.setup()
 vim.api.nvim_create_user_command("TrimWhitespace", MiniTrailspace.trim, {
