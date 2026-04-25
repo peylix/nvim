@@ -49,6 +49,7 @@ map(
 map("t", "<C-Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 Config.leader_group_clues = {
+  { mode = "n", keys = "<Leader>a", desc = "+AI" },
   { mode = "n", keys = "<Leader>b", desc = "+Buffer" },
   { mode = "n", keys = "<Leader>e", desc = "+Explore/Edit" },
   { mode = "n", keys = "<Leader>f", desc = "+Find" },
@@ -99,6 +100,6 @@ end, { desc = "Format this buffer" })
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
     local opts = { buffer = args.buf, desc = "LSP Rename Symbol" }
-    vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, opts)
+    map("n", "<leader>lr", vim.lsp.buf.rename, opts)
   end,
 })
