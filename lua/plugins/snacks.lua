@@ -1,9 +1,9 @@
+local map = vim.keymap.set
+
 -- snacks.nvim
 vim.pack.add({ "https://github.com/folke/snacks.nvim" })
 
 local snacks = require("snacks")
-
-local map = vim.keymap.set
 
 snacks.setup({
   picker = {

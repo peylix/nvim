@@ -1,3 +1,5 @@
+local map = vim.keymap.set
+
 -- nvim-treesitter
 local ts_update = function()
   vim.cmd("TSUpdate")
@@ -7,7 +9,7 @@ Config.on_packchanged("nvim-treesitter", { "update" }, ts_update, ":TSUpdate")
 vim.pack.add({
   "https://github.com/nvim-treesitter/nvim-treesitter",
   "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
-  "https://github.com/nvim-treesitter/nvim-treesitter-context"
+  "https://github.com/nvim-treesitter/nvim-treesitter-context",
 })
 
 -- nvim-lspconfig
@@ -84,6 +86,6 @@ vim.pack.add({ "https://github.com/lervag/vimtex" })
 
 vim.g.vimtex_view_method = "skim"
 -- Snacks integration
-vim.keymap.set("n", "<localleader>lt", function()
+map("n", "<localleader>lt", function()
   return require("vimtex.snacks").toc()
 end, { desc = "Search in VimTex" })
