@@ -23,7 +23,7 @@ o.linebreak = true -- wrap lines at "breakat" if "warp" is set
 o.number = true
 wo.relativenumber = true
 o.pumborder = "single" -- use border in popup menu
-o.pumheight = 10 -- make popup menu smaller -- TODO: ?
+o.pumheight = 10 -- limit the height of a popup menu
 o.pummaxwidth = 100 -- limit the maximum width of the popup menu
 o.ruler = false
 o.shortmess = "CFOSWaco" -- disable some completion messages
@@ -33,7 +33,7 @@ o.splitbelow = true -- horizontal splits should be placed below
 o.splitkeep = "screen"
 o.splitright = true -- reduce splits should be placed to the right
 o.winborder = "single" -- use border in floating windows
-o.wrap = false -- do not visually wrap lines -- TODO: ?
+o.wrap = false -- do not visually wrap lines
 o.cmdheight = 0
 o.laststatus = 2
 

@@ -27,7 +27,7 @@ require("buffer_manager").setup({
   },
 })
 
-map("n", "<Leader>bb", function()
+map("n", "<leader>bb", function()
   require("buffer_manager.ui").toggle_quick_menu()
 end, { desc = "View all buffers" })
 map("n", "]b", function()

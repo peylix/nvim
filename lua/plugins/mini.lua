@@ -44,9 +44,12 @@ vim.api.nvim_create_user_command("TrimLastLine", MiniTrailspace.trim_last_lines,
 -- set color for trailing whitespace and ensure it stays the same across colorschemes
 local trailspace_color = "#4C1036"
 vim.api.nvim_set_hl(0, "MiniTrailspace", { bg = trailspace_color })
-Config.create_autocmd("ColorScheme", "*", function()
-  vim.api.nvim_set_hl(0, "MiniTrailspace", { bg = trailspace_color })
-end)
+Config.create_autocmd("ColorScheme", {
+  pattern = "*",
+  callback = function()
+    vim.api.nvim_set_hl(0, "MiniTrailspace", { bg = trailspace_color })
+  end,
+})
 
 require("mini.ai").setup()
 
@@ -134,11 +137,11 @@ require("mini.sessions").setup({
 
 local session_new = 'vim.ui.input({ prompt = "Session name: " }, MiniSessions.write)'
 
-map("n", "<leader>sd", '<Cmd>lua MiniSessions.select("delete")<CR>', { desc = "Delete" })
-map("n", "<leader>sn", "<Cmd>lua " .. session_new .. "<CR>", { desc = "New" })
-map("n", "<leader>sr", '<Cmd>lua MiniSessions.select("read")<CR>', { desc = "Read" })
-map("n", "<leader>sR", "<Cmd>lua MiniSessions.restart()<CR>", { desc = "Restart" })
-map("n", "<leader>sw", "<Cmd>lua MiniSessions.write()<CR>", { desc = "Write current" })
+map("n", "<leader>sd", '<cmd>lua MiniSessions.select("delete")<CR>', { desc = "Delete" })
+map("n", "<leader>sn", "<cmd>lua " .. session_new .. "<CR>", { desc = "New" })
+map("n", "<leader>sr", '<cmd>lua MiniSessions.select("read")<CR>', { desc = "Read" })
+map("n", "<leader>sR", "<cmd>lua MiniSessions.restart()<CR>", { desc = "Restart" })
+map("n", "<leader>sw", "<cmd>lua MiniSessions.write()<CR>", { desc = "Write current" })
 
 require("mini.diff").setup({
   view = {
@@ -148,7 +151,7 @@ require("mini.diff").setup({
   map(
     "n",
     "<leader>gd",
-    "<Cmd>lua MiniDiff.toggle_overlay()<CR>",
+    "<cmd>lua MiniDiff.toggle_overlay()<CR>",
     { desc = "Toggle diff overlay" }
   ),
 })

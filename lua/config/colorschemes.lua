@@ -17,9 +17,14 @@ local function reset_termbg()
   vim.api.nvim_ui_send("\027]111\027\\")
 end
 
-Config.create_autocmd({ 'ColorScheme', 'VimResume' }, '*', sync_termbg, 'Sync terminal bg with colorscheme')
-Config.create_autocmd({ 'VimLeavePre', 'VimSuspend' }, '*', reset_termbg, 'Reset terminal bg on exit/suspend')
+Config.create_autocmd(
+  { "ColorScheme", "VimResume" },
+  { pattern = "*", callback = sync_termbg, desc = "Sync terminal bg with colorscheme" }
+)
+Config.create_autocmd(
+  { "VimLeavePre", "VimSuspend" },
+  { pattern = "*", callback = reset_termbg, desc = "Reset terminal bg on exit/suspend" }
+)
 
 -- Sync immediately on startup
 sync_termbg()
-

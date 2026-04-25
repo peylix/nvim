@@ -1,7 +1,11 @@
 -- highlight yanked lines
-Config.create_autocmd("TextYankPost", "*", function()
-  vim.highlight.on_yank({ higroup = "IncSearch", timeout = 200 })
-end, "Highlight selection on yank")
+Config.create_autocmd("TextYankPost", {
+  pattern = "*",
+  callback = function()
+    vim.highlight.on_yank({ higroup = "IncSearch", timeout = 200 })
+  end,
+  desc = "Highlight selection on yank",
+})
 
 -- User commands for vim.pack
 vim.api.nvim_create_user_command("PackUpdate", function()

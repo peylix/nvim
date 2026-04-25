@@ -4,8 +4,8 @@ _G.Config = {}
 
 -- a wrapper for vim.api.nvim_create_autocmd with the augroup set to "peylix-config"
 local gr = vim.api.nvim_create_augroup("peylix-config", {})
-Config.create_autocmd = function(event, pattern, callback, desc)
-  local opts = { group = gr, pattern = pattern, callback = callback, desc = desc }
+Config.create_autocmd = function(event, opts)
+  opts.group = gr
   vim.api.nvim_create_autocmd(event, opts)
 end
 
@@ -17,7 +17,7 @@ Config.on_packchanged = function(plugin_name, kinds, callback, desc)
     if not ev.data.active then vim.cmd.packadd(plugin_name) end
     callback()
   end
-  Config.create_autocmd("PackChanged", "*", f, desc)
+  Config.create_autocmd("PackChanged", { pattern = "*", callback = f, desc = desc })
 end
 
 -- Enable ui2

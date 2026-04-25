@@ -255,7 +255,7 @@ ins_right({
 -- initialize lualine
 lualine.setup(config)
 
-vim.api.nvim_create_autocmd({ "RecordingEnter", "RecordingLeave" }, {
+Config.create_autocmd({ "RecordingEnter", "RecordingLeave" }, {
   callback = function()
     local delay = vim.fn.mode() == "n" and 0 or 10
     vim.defer_fn(function()

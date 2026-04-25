@@ -49,56 +49,43 @@ map(
 map("t", "<C-Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 -- Restart Neovim
-map("n", "<leader>or", "<cmd>restart<CR>", {noremap=true, silent=true, desc="Restart Neovim"})
+map(
+  "n",
+  "<leader>or",
+  "<cmd>restart<CR>",
+  { noremap = true, silent = true, desc = "Restart Neovim" }
+)
 
 Config.leader_group_clues = {
-  { mode = "n", keys = "<Leader>a", desc = "+AI" },
-  { mode = "n", keys = "<Leader>b", desc = "+Buffer" },
-  { mode = "n", keys = "<Leader>e", desc = "+Explore" },
-  { mode = "n", keys = "<Leader>f", desc = "+Find" },
-  { mode = "n", keys = "<Leader>g", desc = "+Git" },
-  { mode = "n", keys = "<Leader>l", desc = "+Language" },
-  { mode = "n", keys = "<Leader>o", desc = "+Other" },
-  { mode = "n", keys = "<Leader>s", desc = "+Session" },
-  { mode = "n", keys = "<Leader>t", desc = "+Terminal" },
+  { mode = "n", keys = "<leader>a", desc = "+AI" },
+  { mode = "n", keys = "<leader>b", desc = "+Buffer" },
+  { mode = "n", keys = "<leader>e", desc = "+Explore" },
+  { mode = "n", keys = "<leader>f", desc = "+Find" },
+  { mode = "n", keys = "<leader>g", desc = "+Git" },
+  { mode = "n", keys = "<leader>l", desc = "+Language" },
+  { mode = "n", keys = "<leader>o", desc = "+Other" },
+  { mode = "n", keys = "<leader>s", desc = "+Session" },
+  { mode = "n", keys = "<leader>t", desc = "+Terminal" },
 }
 
 Config.localleader_group_clues = {
   { mode = "n", keys = "<localleader>l", desc = "+VimTex" },
 }
 
--- Mini.Files
-map("n", "<leader>ed", "<lmd>lua MiniFiles.open()<CR>", { desc = "Directory" })
-map(
-  "n",
-  "<leader>ee",
-  "<cmd>lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<CR>",
-  { desc = "File directory" }
-)
-map("n", "<Leader>eq", function()
+-- Toggle quickfix/localfix list
+map("n", "<leader>oq", function()
   vim.cmd(vim.fn.getqflist({ winid = true }).winid ~= 0 and "cclose" or "copen")
 end, { desc = "Quickfix list" })
-map("n", "<Leader>el", function()
+map("n", "<leader>ol", function()
   vim.cmd(vim.fn.getloclist(0, { winid = true }).winid ~= 0 and "lclose" or "lopen")
 end, { desc = "Location list" })
-
--- buffer_manager.nvim
-map("n", "<Leader>bb", function()
-  require("buffer_manager.ui").toggle_quick_menu()
-end, { desc = "View all buffers" })
-map("n", "]b", function()
-  require("buffer_manager.ui").nav_next()
-end, { desc = "Next buffer in buffer manager list" })
-map("n", "[b", function()
-  require("buffer_manager.ui").nav_prev()
-end, { desc = "Previous buffer in buffer manager list" })
 
 -- Language related
 map("n", "<leader>lf", function()
   require("conform").format({ async = true, lsp_fallback = true })
 end, { desc = "Format this buffer" })
 
-vim.api.nvim_create_autocmd("LspAttach", {
+Config.create_autocmd("LspAttach", {
   callback = function(args)
     local opts = { buffer = args.buf, desc = "LSP Rename Symbol" }
     map("n", "<leader>lr", vim.lsp.buf.rename, opts)

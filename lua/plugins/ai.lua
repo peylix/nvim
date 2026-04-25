@@ -27,13 +27,17 @@ local map = vim.keymap.set
 --   disable_limit_reached_message = true,
 -- })
 --
--- Config.create_autocmd("User", "BlinkCmpMenuOpen", function()
---   vim.b.copilot_suggestion_hidden = true
--- end)
+-- Config.create_autocmd("BlinkCmpMenuOpen", {
+--   callback = function()
+--     vim.b.copilot_suggestion_hidden = true
+--   end,
+-- })
 --
--- Config.create_autocmd("User", "BlinkCmpMenuClose", function()
---   vim.b.copilot_suggestion_hidden = false
--- end)
+-- Config.create_autocmd("BlinkCmpMenuClose", {
+--   callback = function()
+--     vim.b.copilot_suggestion_hidden = false
+--   end,
+-- })
 
 -- sidekick.nvim
 vim.pack.add({ "https://github.com/folke/sidekick.nvim" })
