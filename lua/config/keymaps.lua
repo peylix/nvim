@@ -51,15 +51,13 @@ map("t", "<C-Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 Config.leader_group_clues = {
   { mode = "n", keys = "<Leader>a", desc = "+AI" },
   { mode = "n", keys = "<Leader>b", desc = "+Buffer" },
-  { mode = "n", keys = "<Leader>e", desc = "+Explore/Edit" },
+  { mode = "n", keys = "<Leader>e", desc = "+Explore" },
   { mode = "n", keys = "<Leader>f", desc = "+Find" },
   { mode = "n", keys = "<Leader>g", desc = "+Git" },
   { mode = "n", keys = "<Leader>l", desc = "+Language" },
   { mode = "n", keys = "<Leader>o", desc = "+Other" },
   { mode = "n", keys = "<Leader>s", desc = "+Session" },
   { mode = "n", keys = "<Leader>t", desc = "+Terminal" },
-  { mode = "x", keys = "<Leader>g", desc = "+Git" },
-  { mode = "x", keys = "<Leader>l", desc = "+Language" },
 }
 
 Config.localleader_group_clues = {

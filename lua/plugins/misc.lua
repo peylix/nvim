@@ -43,7 +43,7 @@ map({ "t", "n" }, "<leader>bs", function()
   vim.defer_fn(function()
     vim.fn.feedkeys("/")
   end, 50)
-end, { noremap = true })
+end, { noremap = true, desc = "Search in buffer menu" })
 
 -- im-select.nvim
 -- NOTE: make sure macism is installed
