@@ -165,6 +165,17 @@ ins_left({
 -- })
 
 ins_left({
+  function()
+    local reg = vim.fn.reg_recording()
+    if reg ~= "" then
+      return "Recording @" .. reg
+    end
+    return ""
+  end,
+  color = { fg = colors.red, gui = "bold" },
+})
+
+ins_left({
   "filename",
   cond = conditions.buffer_not_empty,
   color = { fg = colors.blue, gui = "bold" },
@@ -196,7 +207,7 @@ ins_left({
 ins_left({
   -- Lsp server name
   function()
-    local msg = "No Active Lsp"
+    local msg = "N/A"
     local buf_ft = vim.api.nvim_get_option_value("filetype", { buf = 0 })
     local clients = vim.lsp.get_clients()
     if next(clients) == nil then return msg end
@@ -206,7 +217,7 @@ ins_left({
     end
     return msg
   end,
-  icon = " LSP:",
+  icon = " ",
   color = { fg = "#ffffff", gui = "bold" },
 })
 
@@ -218,12 +229,12 @@ ins_right({
   color = { fg = colors.green, gui = "bold" },
 })
 
-ins_right({
-  "fileformat",
-  fmt = string.upper,
-  icons_enabled = false,
-  color = { fg = colors.green, gui = "bold" },
-})
+-- ins_right({
+--   "fileformat",
+--   fmt = string.upper,
+--   icons_enabled = false,
+--   color = { fg = colors.green, gui = "bold" },
+-- })
 
 ins_right({
   "branch",
@@ -245,6 +256,15 @@ ins_right({
 
 -- initialize lualine
 lualine.setup(config)
+
+vim.api.nvim_create_autocmd({ "RecordingEnter", "RecordingLeave" }, {
+  callback = function()
+    local delay = vim.fn.mode() == "n" and 0 or 10
+    vim.defer_fn(function()
+      lualine.refresh()
+    end, delay)
+  end,
+})
 
 -- comfy-line-numbers.nvim
 vim.pack.add({ "https://github.com/mluders/comfy-line-numbers.nvim" })
@@ -366,3 +386,7 @@ end, { desc = "Next todo comment" })
 map("n", "[t", function()
   todo_comments.jump_prev()
 end, { desc = "Previous todo comment" })
+
+-- fidget.nvim
+vim.pack.add({ "https://github.com/j-hui/fidget.nvim" })
+require("fidget").setup()
