@@ -133,18 +133,18 @@ ins_left({
 
       i = colors.green,
 
-      v = colors.blue,
-      V = colors.blue,
-      [""] = colors.blue,
+      v = colors.magenta,
+      V = colors.magenta,
+      [""] = colors.magenta,
 
-      c = colors.magenta,
+      c = colors.orange,
 
       R = colors.violet,
       Rv = colors.violet,
 
-      s = colors.orange,
-      S = colors.orange,
-      [""] = colors.orange,
+      s = colors.blue,
+      S = colors.blue,
+      [""] = colors.blue,
 
       t = colors.red,
     }
