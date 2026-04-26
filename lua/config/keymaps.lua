@@ -56,6 +56,17 @@ map(
   { noremap = true, silent = true, desc = "Restart Neovim" }
 )
 
+-- Yank the entire buffer
+local function yank_entire_buffer()
+  vim.cmd("%y+")
+  local lines = vim.api.nvim_buf_line_count(0)
+  vim.notify(("Yanked %d lines"):format(lines))
+end
+
+vim.keymap.set("n", "<leader>oy", yank_entire_buffer, {
+  desc = "Yank entire buffer",
+})
+
 Config.leader_group_clues = {
   { mode = "n", keys = "<leader>a", desc = "+AI" },
   { mode = "n", keys = "<leader>b", desc = "+Buffer" },
