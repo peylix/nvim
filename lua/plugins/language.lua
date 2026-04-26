@@ -48,12 +48,19 @@ end
 local parsers = Config.profile_is_reduced and ts_parser_reduced or ts_parser_default
 local filetypes = parsers_to_filetypes(parsers)
 
-require("nvim-treesitter").install(parsers)
+-- skip parser installation if tree-setter cli is not available
+if vim.fn.executable("tree-sitter") == 1 then
+  require("nvim-treesitter").install(parsers)
+else
+  vim.notify("Tree-sitter CLI not found. Skipping parser install.", vim.log.levels.WARN)
+end
+
 Config.create_autocmd("FileType", {
   pattern = filetypes,
   callback = function()
     -- enable highlighting
-    vim.treesitter.start()
+    local ok = pcall(vim.treesitter.start)
+    if not ok then return end
 
     -- enable folds
     vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
