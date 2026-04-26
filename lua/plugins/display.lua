@@ -14,6 +14,7 @@ local lualine = require("lualine")
 local colors = {
   bg       = '#070c30',
   fg       = '#bbc2cf',
+  white    = '#ffffff',
   yellow   = '#ECBE7B',
   cyan     = '#008080',
   darkblue = '#081633',
@@ -216,7 +217,17 @@ ins_left({
     return msg
   end,
   icon = " ",
-  color = { fg = "#ffffff", gui = "bold" },
+  color = { fg = colors.white, gui = "bold" },
+})
+
+ins_right({
+  function()
+    local bufnr = vim.api.nvim_get_current_buf()
+    if vim.treesitter.highlighter.active[bufnr] then return "TS" end
+    return ""
+  end,
+  icon = "󰔱",
+  color = { fg = colors.green, gui = "bold" },
 })
 
 -- Add components to right sections
