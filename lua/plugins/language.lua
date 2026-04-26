@@ -12,6 +12,58 @@ vim.pack.add({
   "https://github.com/nvim-treesitter/nvim-treesitter-context",
 })
 
+local ts_parser_default = {
+  "lua",
+  "vim",
+  "python",
+  "javascript",
+  "typescript",
+  "html",
+  "css",
+  "c",
+  "bash",
+  "json",
+  "comment",
+}
+
+local ts_parser_reduced = {
+  "lua",
+  "vim",
+  "bash",
+  "json",
+  "comment",
+}
+
+-- get filetype names from treesitter parser names
+local function parsers_to_filetypes(langs)
+  local filetypes = {}
+  for _, lang in ipairs(langs) do
+    for _, ft in ipairs(vim.treesitter.language.get_filetypes(lang)) do
+      table.insert(filetypes, ft)
+    end
+  end
+  return filetypes
+end
+
+local parsers = Config.profile_is_reduced and ts_parser_reduced or ts_parser_default
+local filetypes = parsers_to_filetypes(parsers)
+
+require("nvim-treesitter").install(parsers)
+Config.create_autocmd("FileType", {
+  pattern = filetypes,
+  callback = function()
+    -- enable highlighting
+    vim.treesitter.start()
+
+    -- enable folds
+    vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
+    vim.wo[0][0].foldmethod = "expr"
+
+    -- enable indentation
+    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+  end,
+})
+
 -- nvim-lspconfig
 vim.pack.add({ "https://github.com/neovim/nvim-lspconfig" })
 
@@ -54,6 +106,7 @@ vim.lsp.enable({
   "cssls",
   "html",
   "ts_ls",
+  "markdown_oxide",
 })
 
 vim.lsp.codelens.enable(true) -- enable codelens

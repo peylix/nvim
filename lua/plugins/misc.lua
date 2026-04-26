@@ -30,9 +30,11 @@ require("buffer_manager").setup({
 map("n", "<leader>bb", function()
   require("buffer_manager.ui").toggle_quick_menu()
 end, { desc = "View all buffers" })
+
 map("n", "]b", function()
   require("buffer_manager.ui").nav_next()
 end, { desc = "Next buffer in buffer manager list" })
+
 map("n", "[b", function()
   require("buffer_manager.ui").nav_prev()
 end, { desc = "Previous buffer in buffer manager list" })
