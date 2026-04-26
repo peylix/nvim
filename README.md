@@ -6,12 +6,13 @@ My personal Neovim config.
 
 1. Neovim 0.12+ (required by `vim.pack`, `ui2`, etc.)
 2. Git
-3. ripgrep
-4. Node.js & npm
-5. Tree-sitter CLI
-6. Nerd Font (for icons)
-7. xclip (for clipboard support on Linux)
-8. macism (for `im-select.nvim` on macOS)
+3. curl
+4. ripgrep
+5. Node.js & npm
+6. Tree-sitter CLI
+7. Nerd Font (for icons)
+8. xclip (for clipboard support on Linux)
+9. macism (for `im-select.nvim` on macOS)
 
 ## Reduced Profile
 
