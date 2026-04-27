@@ -83,12 +83,6 @@ local miniclue = require("mini.clue")
       miniclue.gen_clues.marks(),
       miniclue.gen_clues.registers(),
       miniclue.gen_clues.square_brackets(),
-      -- This creates a submode for window resize mappings. Try the following:
-      -- - Press `<C-w>s` to make a window split.
-      -- - Press `<C-w>+` to increase height. Clue window still shows clues as if
-      --   `<C-w>` is pressed again. Keep pressing just `+` to increase height.
-      --   Try pressing `-` to decrease height.
-      -- - Stop submode either by `<Esc>` or by any key that is not in submode.
       miniclue.gen_clues.windows({ submode_resize = true }),
       miniclue.gen_clues.z(),
     },
