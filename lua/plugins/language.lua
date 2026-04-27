@@ -55,7 +55,8 @@ else
   vim.notify("Tree-sitter CLI not found. Skipping parser install.", vim.log.levels.WARN)
 end
 
-Config.create_autocmd("FileType", {
+vim.api.nvim_create_autocmd("FileType", {
+  group = Config.augr,
   pattern = filetypes,
   callback = function()
     -- enable highlighting

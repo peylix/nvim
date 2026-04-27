@@ -3,11 +3,7 @@
 _G.Config = {}
 
 -- a wrapper for vim.api.nvim_create_autocmd with the augroup set to "peylix-config"
-local gr = vim.api.nvim_create_augroup("peylix-config", {})
-Config.create_autocmd = function(event, opts)
-  opts.group = gr
-  vim.api.nvim_create_autocmd(event, opts)
-end
+Config.augr = vim.api.nvim_create_augroup("peylix-config", {})
 
 -- Define custom `vim.pack.add()` hook helper. See `:h vim.pack-events`.
 Config.on_packchanged = function(plugin_name, kinds, callback, desc)
@@ -17,7 +13,10 @@ Config.on_packchanged = function(plugin_name, kinds, callback, desc)
     if not ev.data.active then vim.cmd.packadd(plugin_name) end
     callback()
   end
-  Config.create_autocmd("PackChanged", { pattern = "*", callback = f, desc = desc })
+  vim.api.nvim_create_autocmd(
+    "PackChanged",
+    { group = Config.augr, pattern = "*", callback = f, desc = desc }
+  )
 end
 
 -- Enable ui2
@@ -41,6 +40,7 @@ require("vim._core.ui2").enable({
   },
 })
 
+-- Add configs
 require("config.colorschemes")
 require("config.options")
 require("config.keymaps")

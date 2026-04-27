@@ -41,7 +41,8 @@ vim.api.nvim_create_user_command("TrimLastLine", MiniTrailspace.trim_last_lines,
 -- set color for trailing whitespace and ensure it stays the same across colorschemes
 local trailspace_color = "#4C1036"
 vim.api.nvim_set_hl(0, "MiniTrailspace", { bg = trailspace_color })
-Config.create_autocmd("ColorScheme", {
+vim.api.nvim_create_autocmd("ColorScheme", {
+  group = Config.augr,
   pattern = "*",
   callback = function()
     vim.api.nvim_set_hl(0, "MiniTrailspace", { bg = trailspace_color })

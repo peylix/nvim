@@ -63,7 +63,7 @@ local function yank_entire_buffer()
   vim.notify(("Yanked %d lines"):format(lines))
 end
 
-vim.keymap.set("n", "<leader>oy", yank_entire_buffer, {
+map("n", "<leader>oy", yank_entire_buffer, {
   desc = "Yank entire buffer",
 })
 
@@ -96,7 +96,8 @@ map("n", "<leader>lf", function()
   require("conform").format({ async = true, lsp_fallback = true })
 end, { desc = "Format this buffer" })
 
-Config.create_autocmd("LspAttach", {
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = Config.augr,
   callback = function(args)
     local opts = { buffer = args.buf, desc = "LSP Rename Symbol" }
     map("n", "<leader>lr", vim.lsp.buf.rename, opts)
