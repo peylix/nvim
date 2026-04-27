@@ -23,4 +23,4 @@ export PNVIM_PROFILE=reduced  # for bash/zsh
 set -gx PNVIM_PROFILE reduced  # for fish
 ```
 
-Or add it to the shell config file (e.g., `~/.bashrc`, `~/.zshrc`, `.config/fish/config.fsh`, etc.)
+Or add it to the shell config file (e.g., `~/.bashrc`, `~/.zshrc`, `~/.config/fish/config.fsh`, etc.)
