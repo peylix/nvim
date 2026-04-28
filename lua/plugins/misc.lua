@@ -20,7 +20,7 @@ require("buffer_manager").setup({
   focus_alternate_buffer = false,
   short_file_names = true,
   short_term_names = true,
-  loop_nav = false,
+  loop_nav = true,
   highlight = "Normal:BufferManagerBorder",
   win_extra_options = {
     winhighlight = "Normal:BufferManagerNormal",

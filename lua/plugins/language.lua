@@ -162,7 +162,7 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- Typst
+-- typst-preview.nvim
 vim.api.nvim_create_autocmd("FileType", {
   group = Config.augr,
   pattern = "typst",
