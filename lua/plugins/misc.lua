@@ -57,6 +57,9 @@ map({ "t", "n" }, "<leader>bs", function()
   end, 50)
 end, { noremap = true, desc = "Search in buffer menu" })
 
+-- Use blue color for modified files
+vim.api.nvim_set_hl(0, "BufferManagerModified", { fg = "#51afef", bold = true })
+
 -- im-select.nvim
 -- NOTE: make sure macism is installed
 if Config.profile_is_default and vim.fn.has("mac") == 1 then

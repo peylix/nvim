@@ -30,7 +30,7 @@
       "src": "https://github.com/copilotlsp-nvim/copilot-lsp"
     },
     "copilot.lua": {
-      "rev": "3b95c93d804077dd409d62a6da53a8c92ac8f415",
+      "rev": "94b22035e31e82821d015f6481ea3c17800e55b7",
       "src": "https://github.com/zbirenbaum/copilot.lua"
     },
     "dial.nvim": {
@@ -62,7 +62,7 @@
       "src": "https://github.com/nvim-lualine/lualine.nvim"
     },
     "mason.nvim": {
-      "rev": "12ddd182d9efbdc848b540f16484a583d52da0fb",
+      "rev": "cb8445f8ce85d957416c106b780efd51c6298f89",
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini.nvim": {
@@ -90,7 +90,7 @@
       "src": "https://github.com/mfussenegger/nvim-lint"
     },
     "nvim-lspconfig": {
-      "rev": "21db1fd40cbcbf1524ae154ab8f394fdf085749a",
+      "rev": "bf5abe69c1874531f359a822d0cff4d73e26113f",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-spider": {
