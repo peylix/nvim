@@ -46,3 +46,4 @@ keymaps
 treesitter
 statusline
 peylix
+autocmd

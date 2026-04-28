@@ -21,13 +21,19 @@ require("mini.files").setup({
   },
 })
 
-map("n", "<leader>ed", "<lmd>lua MiniFiles.open()<CR>", { desc = "Directory" })
-map(
-  "n",
-  "<leader>ee",
-  "<cmd>lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<CR>",
-  { desc = "File directory" }
-)
+map("n", "<leader>ed", function()
+  MiniFiles.open()
+end, { desc = "Working directory" })
+
+map("n", "<leader>ee", function()
+  local this_buffer = vim.api.nvim_buf_get_name(0)
+  -- avoid mini.files get confused with "ministarter:/1/welcome"
+  if vim.startswith(this_buffer, "ministarter") then
+    vim.notify("Enter a file first", vim.log.levels.WARN)
+    return
+  end
+  MiniFiles.open(this_buffer)
+end, { desc = "Current file" })
 
 local minitrailspace = require("mini.trailspace")
 minitrailspace.setup()
@@ -68,41 +74,41 @@ require("mini.pairs").setup({ modes = { command = true } })
 require("mini.cursorword").setup()
 
 local miniclue = require("mini.clue")
-  -- stylua: ignore
-  miniclue.setup({
-    -- Define which clues to show. By default shows only clues for custom mappings
-    -- (uses `desc` field from the mapping; takes precedence over custom clue).
-    window = {
-        delay = 0,
-    },
-    clues = {
-      -- This is defined in 'keymaps.lua' with Leader group descriptions
-      Config.leader_group_clues,
-      Config.localleader_group_clues,
-      miniclue.gen_clues.builtin_completion(),
-      miniclue.gen_clues.g(),
-      miniclue.gen_clues.marks(),
-      miniclue.gen_clues.registers(),
-      miniclue.gen_clues.square_brackets(),
-      miniclue.gen_clues.windows({ submode_resize = true }),
-      miniclue.gen_clues.z(),
-    },
-    -- Explicitly opt-in for set of common keys to trigger clue window
-    triggers = {
-      { mode = { 'n', 'x' }, keys = '<Leader>' }, -- Leader triggers
-      { mode = { 'n', 'x' }, keys = '<localleader>' }, -- Leader triggers
-      { mode =   'n',        keys = '\\' },       -- mini.basics
-      { mode = { 'n', 'x' }, keys = ']' },
-      { mode =   'i',        keys = '<C-x>' },    -- Built-in completion
-      { mode = { 'n', 'x' }, keys = 'g' },        -- `g` key
-      { mode = { 'n', 'x' }, keys = "'" },        -- Marks
-      { mode = { 'n', 'x' }, keys = '`' },
-      { mode = { 'n', 'x' }, keys = '"' },        -- Registers
-      { mode = { 'i', 'c' }, keys = '<C-r>' },
-      { mode =   'n',        keys = '<C-w>' },    -- Window commands
-      { mode = { 'n', 'x' }, keys = 'z' },        -- `z` key
-    },
-  })
+
+miniclue.setup({
+  -- Define which clues to show. By default shows only clues for custom mappings
+  -- (uses `desc` field from the mapping; takes precedence over custom clue).
+  window = {
+    delay = 0,
+  },
+  clues = {
+    -- This is defined in 'keymaps.lua' with Leader group descriptions
+    Config.leader_group_clues,
+    Config.localleader_group_clues,
+    miniclue.gen_clues.builtin_completion(),
+    miniclue.gen_clues.g(),
+    miniclue.gen_clues.marks(),
+    miniclue.gen_clues.registers(),
+    miniclue.gen_clues.square_brackets(),
+    miniclue.gen_clues.windows({ submode_resize = true }),
+    miniclue.gen_clues.z(),
+  },
+  -- Explicitly opt-in for set of common keys to trigger clue window
+  triggers = {
+    { mode = { "n", "x" }, keys = "<Leader>" }, -- Leader triggers
+    { mode = { "n", "x" }, keys = "<localleader>" }, -- Leader triggers
+    { mode = "n", keys = "\\" }, -- mini.basics
+    { mode = { "n", "x" }, keys = "]" },
+    { mode = "i", keys = "<C-x>" }, -- Built-in completion
+    { mode = { "n", "x" }, keys = "g" }, -- `g` key
+    { mode = { "n", "x" }, keys = "'" }, -- Marks
+    { mode = { "n", "x" }, keys = "`" },
+    { mode = { "n", "x" }, keys = '"' }, -- Registers
+    { mode = { "i", "c" }, keys = "<C-r>" },
+    { mode = "n", keys = "<C-w>" }, -- Window commands
+    { mode = { "n", "x" }, keys = "z" }, -- `z` key
+  },
+})
 
 require("mini.starter").setup({
   header = table.concat({
@@ -117,6 +123,22 @@ require("mini.starter").setup({
     "▐▌  ▐▌ ▝▚▞▘ ▗▄█▄▖▐▌  ▐▌         ",
   }, "\n"),
   footer = "Have a nice day!",
+})
+
+-- ensure mini.clue is available on mini.starter
+vim.api.nvim_create_autocmd("User", {
+  pattern = "MiniStarterOpened",
+  callback = function(event)
+    MiniClue.enable_buf_triggers(event.buf)
+    local map_query = function(key)
+      local rhs = function()
+        MiniStarter.add_to_query(key, event.buf)
+      end
+      vim.keymap.set("n", key, rhs, { buffer = event.buf, nowait = true })
+    end
+    map_query("g")
+    map_query("z")
+  end,
 })
 
 require("mini.sessions").setup({
