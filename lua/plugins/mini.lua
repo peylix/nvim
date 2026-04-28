@@ -154,15 +154,15 @@ map("n", "<leader>sr", '<cmd>lua MiniSessions.select("read")<CR>', { desc = "Rea
 map("n", "<leader>sR", "<cmd>lua MiniSessions.restart()<CR>", { desc = "Restart" })
 map("n", "<leader>sw", "<cmd>lua MiniSessions.write()<CR>", { desc = "Write current" })
 
-require("mini.diff").setup({
-  view = {
-    style = "sign",
-    signs = { add = "┃", change = "┃", delete = "┃" },
-  },
-  map(
-    "n",
-    "<leader>gd",
-    "<cmd>lua MiniDiff.toggle_overlay()<CR>",
-    { desc = "Toggle diff overlay" }
-  ),
-})
+-- require("mini.diff").setup({
+--   view = {
+--     style = "sign",
+--     signs = { add = "┃", change = "┃", delete = "┃" },
+--   },
+--   map(
+--     "n",
+--     "<leader>gd",
+--     "<cmd>lua MiniDiff.toggle_overlay()<CR>",
+--     { desc = "Toggle diff overlay" }
+--   ),
+-- })
