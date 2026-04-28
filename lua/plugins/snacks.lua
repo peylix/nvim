@@ -260,15 +260,11 @@ map("n", "<leader>gQ", function()
   Snacks.picker.gh_pr({ state = "all" })
 end, { desc = "GitHub Pull Requests (all)" })
 
-map("n", "<leader>bt", function()
+map("n", "<leader>ba", function()
   Snacks.scratch()
 end, { desc = "Toggle Scratch Buffer" })
 
-map("n", "<leader>bT", function()
-  Snacks.scratch.select()
-end, { desc = "Select Scratch Buffer" })
-
-map("n", "<leader>bS", function()
+map("n", "<leader>bA", function()
   Snacks.scratch.select()
 end, { desc = "Select Scratch Buffer" })
 
