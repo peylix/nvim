@@ -133,6 +133,11 @@
       "rev": "31e3c38ce9b29781e4422fc0322eb0a21f4e8668",
       "src": "https://github.com/folke/todo-comments.nvim"
     },
+    "typst-preview.nvim": {
+      "rev": "325036ee145ca51d9efb145c09ac16bce3bc8b7d",
+      "src": "https://github.com/chomosuke/typst-preview.nvim",
+      "version": "1.0.0 - 2.0.0"
+    },
     "vim-startuptime": {
       "rev": "f10474b400c197787a0434548d842a2db583c333",
       "src": "https://github.com/dstein64/vim-startuptime"
