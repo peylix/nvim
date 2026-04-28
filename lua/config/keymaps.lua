@@ -67,6 +67,10 @@ map("n", "<leader>oy", yank_entire_buffer, {
   desc = "Yank entire buffer",
 })
 
+-- Save buffer(s)
+map("n", "<leader>w", "<cmd>w<CR>", { desc = "Save the buffer" })
+map("n", "<leader>W", "<cmd>wa<CR>", { desc = "Save all buffers" })
+
 Config.leader_group_clues = {
   { mode = "n", keys = "<leader>a", desc = "+AI" },
   { mode = "n", keys = "<leader>b", desc = "+Buffer" },
