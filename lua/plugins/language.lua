@@ -142,42 +142,44 @@ require("conform").setup({
   },
 })
 
--- VimTex
-vim.api.nvim_create_autocmd("FileType", {
-  group = Config.augr,
-  pattern = { "plaintex", "tex" },
-  once = true,
-  callback = function()
-    vim.pack.add({
-      "https://github.com/lervag/vimtex",
-    })
+if not Config.profile_is_reduced then
+  -- VimTex
+  vim.api.nvim_create_autocmd("FileType", {
+    group = Config.augr,
+    pattern = { "plaintex", "tex" },
+    once = true,
+    callback = function()
+      vim.pack.add({
+        "https://github.com/lervag/vimtex",
+      })
 
-    vim.g.vimtex_view_method = "skim"
-    -- Snacks integration
-    map("n", "<localleader>lt", function()
-      return require("vimtex.snacks").toc()
-    end, { desc = "Search in VimTex" })
+      vim.g.vimtex_view_method = "skim"
+      -- Snacks integration
+      map("n", "<localleader>lt", function()
+        return require("vimtex.snacks").toc()
+      end, { desc = "Search in VimTex" })
 
-    vim.api.nvim_exec_autocmds("FileType", { pattern = { "plaintex", "tex" } })
-  end,
-})
+      vim.api.nvim_exec_autocmds("FileType", { pattern = { "plaintex", "tex" } })
+    end,
+  })
 
--- typst-preview.nvim
-vim.api.nvim_create_autocmd("FileType", {
-  group = Config.augr,
-  pattern = "typst",
-  once = true,
-  callback = function()
-    vim.pack.add({
-      {
-        src = "https://github.com/chomosuke/typst-preview.nvim",
-        version = vim.version.range("^1"),
-      },
-    })
+  -- typst-preview.nvim
+  vim.api.nvim_create_autocmd("FileType", {
+    group = Config.augr,
+    pattern = "typst",
+    once = true,
+    callback = function()
+      vim.pack.add({
+        {
+          src = "https://github.com/chomosuke/typst-preview.nvim",
+          version = vim.version.range("^1"),
+        },
+      })
 
-    require("typst-preview").setup({
-      dependencies_bin = { tinymist = "tinymist" },
-    })
-    vim.api.nvim_exec_autocmds("FileType", { pattern = "typst" })
-  end,
-})
+      require("typst-preview").setup({
+        dependencies_bin = { tinymist = "tinymist" },
+      })
+      vim.api.nvim_exec_autocmds("FileType", { pattern = "typst" })
+    end,
+  })
+end
