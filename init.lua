@@ -23,7 +23,7 @@ end
 require("vim._core.ui2").enable({
   enable = true,
   msg = {
-    targets = "cmd",
+    targets = "msg",
     cmd = { -- Options related to messages in the cmdline window.
       height = 0.5, -- Maximum height while expanded for messages beyond 'cmdheight'.
     },
