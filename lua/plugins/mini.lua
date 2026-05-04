@@ -71,6 +71,25 @@ minisurround.setup({
 
 require("mini.pairs").setup({ modes = { command = true } })
 
+-- Insert `<>` pair if `<` is typed at line start, don't register for <CR>
+MiniPairs.map("i", "<", {
+  action = "open",
+  pair = "<>",
+  neigh_pattern = "\r.",
+  register = { cr = false },
+})
+
+MiniPairs.map("i", ">", { action = "close", pair = "<>", register = { cr = false } })
+
+-- Create symmetrical `$$` pair only in Tex files
+vim.api.nvim_create_autocmd("FileType", {
+  group = Config.augr,
+  pattern = "tex",
+  callback = function()
+    MiniPairs.map_buf(0, "i", "$", { action = "closeopen", pair = "$$" })
+  end,
+})
+
 require("mini.cursorword").setup()
 
 local miniclue = require("mini.clue")

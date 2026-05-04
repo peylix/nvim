@@ -47,6 +47,9 @@ snacks.setup({
       enabled = false,
     },
   },
+  bigfile = {
+    enabled = true,
+  },
   -- TODO: properly managing the terminal buffers
   terminal = {
     enabled = true,
