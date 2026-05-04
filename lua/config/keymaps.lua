@@ -45,6 +45,15 @@ map(
   { noremap = true, silent = true, desc = "Close buffer" }
 )
 
+-- Hide window
+map(
+  "n",
+  "<leader>h",
+  "<cmd>hide<CR>",
+  { noremap = true, silent = true, desc = "Hide window" }
+)
+
+
 -- New terminal buffer
 map("n", "<leader>tn", "<cmd>te<CR>", { desc = "New terminal" })
 
