@@ -51,45 +51,45 @@ snacks.setup({
     enabled = true,
   },
   -- TODO: properly managing the terminal buffers
-  terminal = {
-    enabled = true,
-    bo = {
-      filetype = "snacks_terminal",
-    },
-    wo = {},
-    stack = true, -- when enabled, multiple split windows with the same position will be stacked together (useful for terminals)
-    keys = {
-      q = "hide",
-      gf = function(self)
-        local f = vim.fn.findfile(vim.fn.expand("<cfile>"), "**")
-        if f == "" then
-          Snacks.notify.warn("No file under cursor")
-        else
-          self:hide()
-          vim.schedule(function()
-            vim.cmd("e " .. f)
-          end)
-        end
-      end,
-      term_normal = {
-        -- "<esc>",
-        -- function(self)
-        --   self.esc_timer = self.esc_timer or (vim.uv or vim.loop).new_timer()
-        --   if self.esc_timer:is_active() then
-        --     self.esc_timer:stop()
-        --     vim.cmd("stopinsert")
-        --   else
-        --     self.esc_timer:start(200, 0, function() end)
-        --     return "<esc>"
-        --   end
-        -- end,
-        "<C-Esc>",
-        mode = "t",
-        expr = true,
-        desc = "Double escape to normal mode",
-      },
-    },
-  },
+  -- terminal = {
+  --   enabled = true,
+  --   bo = {
+  --     filetype = "snacks_terminal",
+  --   },
+  --   wo = {},
+  --   stack = true, -- when enabled, multiple split windows with the same position will be stacked together (useful for terminals)
+  --   keys = {
+  --     q = "hide",
+  --     gf = function(self)
+  --       local f = vim.fn.findfile(vim.fn.expand("<cfile>"), "**")
+  --       if f == "" then
+  --         Snacks.notify.warn("No file under cursor")
+  --       else
+  --         self:hide()
+  --         vim.schedule(function()
+  --           vim.cmd("e " .. f)
+  --         end)
+  --       end
+  --     end,
+  --     term_normal = {
+  --       -- "<esc>",
+  --       -- function(self)
+  --       --   self.esc_timer = self.esc_timer or (vim.uv or vim.loop).new_timer()
+  --       --   if self.esc_timer:is_active() then
+  --       --     self.esc_timer:stop()
+  --       --     vim.cmd("stopinsert")
+  --       --   else
+  --       --     self.esc_timer:start(200, 0, function() end)
+  --       --     return "<esc>"
+  --       --   end
+  --       -- end,
+  --       "<C-Esc>",
+  --       mode = "t",
+  --       expr = true,
+  --       desc = "Double escape to normal mode",
+  --     },
+  --   },
+  -- },
 })
 
 -- Resume previous search
@@ -271,14 +271,14 @@ map("n", "<leader>bA", function()
   Snacks.scratch.select()
 end, { desc = "Select Scratch Buffer" })
 
-map("n", "<leader>tn", function()
-  Snacks.terminal.open()
-end, { desc = "New terminal" })
+-- map("n", "<leader>tn", function()
+--   Snacks.terminal.open()
+-- end, { desc = "New terminal" })
 
-map("n", "<leader>tt", function()
-  Snacks.terminal.toggle()
-end, { desc = "Toggle terminal" })
+-- map("n", "<leader>tt", function()
+--   Snacks.terminal.toggle()
+-- end, { desc = "Toggle terminal" })
 
-map("n", "<leader>tl", function()
-  Snacks.terminal.list()
-end, { desc = "List terminal" })
+-- map("n", "<leader>tl", function()
+--   Snacks.terminal.list()
+-- end, { desc = "List terminal" })

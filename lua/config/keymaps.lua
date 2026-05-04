@@ -48,6 +48,57 @@ map(
 -- Back to normal mode in terminal
 map("t", "<C-Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
+-- Open a terminal split horizontally
+map("n", "<leader>th", "<cmd>hor te<CR>", { desc = "Open a terminal (hor)" })
+
+-- Open a terminal split vertically
+map("n", "<leader>tv", "<cmd>vert te<CR>", { desc = "Open a terminal (vert)" })
+
+-- Close a terminal
+map({ "n", "t" }, "<C-S-Esc>", [[<C-\><C-n><cmd>bd!<cr>]], {
+  desc = "Close terminal",
+})
+
+-- Toggle an existing terminal
+map("n", "<leader>tt", function()
+  local terminals = {}
+
+  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+    if
+      vim.api.nvim_buf_is_valid(buf)
+      and vim.api.nvim_buf_is_loaded(buf)
+      and vim.bo[buf].buftype == "terminal"
+    then
+      local name = vim.api.nvim_buf_get_name(buf)
+      local short_name = name ~= "" and vim.fn.fnamemodify(name, ":t") or "[No Name]"
+
+      table.insert(terminals, {
+        bufnr = buf,
+        label = string.format("[%d] %s", buf, short_name),
+      })
+    end
+  end
+
+  if #terminals == 0 then
+    vim.notify("No terminal buffers found", vim.log.levels.INFO)
+    return
+  end
+
+  vim.ui.select(terminals, {
+    prompt = "Select a terminal buffer for this window:",
+    format_item = function(item)
+      return item.label
+    end,
+  }, function(choice)
+    if not choice then return end
+
+    vim.api.nvim_set_current_buf(choice.bufnr)
+    vim.cmd("startinsert")
+  end)
+end, {
+  desc = "Toggle an existing terminal",
+})
+
 -- Restart Neovim
 map(
   "n",
@@ -57,7 +108,7 @@ map(
 )
 
 -- Create new tab
-map("n", "<leader>bT", "<cmd>tabnew<CR>", {desc="New tab"})
+map("n", "<leader>bT", "<cmd>tabnew<CR>", { desc = "New tab" })
 
 -- Yank the entire buffer
 local function yank_entire_buffer()
