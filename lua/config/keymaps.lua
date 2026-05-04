@@ -45,14 +45,17 @@ map(
   { noremap = true, silent = true, desc = "Close buffer" }
 )
 
+-- New terminal buffer
+map("n", "<leader>tn", "<cmd>te<CR>", { desc = "New terminal" })
+
+-- New terminal buffer in a horizontal split
+map("n", "<leader>th", "<cmd>hor te<CR>", { desc = "New terminal (hor)" })
+
+-- New terminal buffer in a vertical split
+map("n", "<leader>tv", "<cmd>vert te<CR>", { desc = "New terminal (vert)" })
+
 -- Back to normal mode in terminal
 map("t", "<C-Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
-
--- Open a terminal split horizontally
-map("n", "<leader>th", "<cmd>hor te<CR>", { desc = "Open a terminal (hor)" })
-
--- Open a terminal split vertically
-map("n", "<leader>tv", "<cmd>vert te<CR>", { desc = "Open a terminal (vert)" })
 
 -- Close a terminal
 map({ "n", "t" }, "<C-S-Esc>", [[<C-\><C-n><cmd>bd!<cr>]], {
@@ -70,11 +73,12 @@ map("n", "<leader>tt", function()
       and vim.bo[buf].buftype == "terminal"
     then
       local name = vim.api.nvim_buf_get_name(buf)
-      local short_name = name ~= "" and vim.fn.fnamemodify(name, ":t") or "[No Name]"
+      -- local short_name = name ~= "" and vim.fn.fnamemodify(name, ":t") or "[No Name]"
+      local label = name ~= "" and vim.fn.fnamemodify(name, ":t") or ("terminal-" .. buf)
 
       table.insert(terminals, {
         bufnr = buf,
-        label = string.format("[%d] %s", buf, short_name),
+        label = string.format("[%d] %s", buf, label),
       })
     end
   end
@@ -96,8 +100,27 @@ map("n", "<leader>tt", function()
     vim.cmd("startinsert")
   end)
 end, {
-  desc = "Toggle an existing terminal",
+  desc = "Toggle a terminal",
 })
+
+-- Rename current terminal buffer
+map("n", "<leader>tr", function()
+  local bufnr = vim.api.nvim_get_current_buf()
+
+  if vim.bo[bufnr].buftype ~= "terminal" then
+    vim.notify("This can only be used in a terminal buffer", vim.log.levels.WARN)
+    return
+  end
+
+  vim.ui.input({
+    prompt = "New term buffer name: ",
+  }, function(input)
+    if not input or input == "" then return end
+
+    pcall(vim.api.nvim_buf_set_name, bufnr, "term://" .. input)
+    vim.notify("Terminal buffer renamed to " .. input, vim.log.levels.INFO)
+  end)
+end, { desc = "Rename this terminal" })
 
 -- Restart Neovim
 map(
