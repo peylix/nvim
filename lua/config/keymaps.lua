@@ -53,7 +53,6 @@ map(
   { noremap = true, silent = true, desc = "Hide window" }
 )
 
-
 -- New terminal buffer
 map("n", "<leader>tn", "<cmd>te<CR>", { desc = "New terminal" })
 
@@ -156,22 +155,6 @@ map("n", "<leader>oy", yank_entire_buffer, {
 -- Save buffer(s)
 map("n", "<leader>w", "<cmd>w<CR>", { desc = "Save the buffer" })
 map("n", "<leader>W", "<cmd>wa<CR>", { desc = "Save all buffers" })
-
-Config.leader_group_clues = {
-  { mode = "n", keys = "<leader>a", desc = "+AI" },
-  { mode = "n", keys = "<leader>b", desc = "+Buffer" },
-  { mode = "n", keys = "<leader>e", desc = "+Explore" },
-  { mode = "n", keys = "<leader>f", desc = "+Find" },
-  { mode = "n", keys = "<leader>g", desc = "+Git" },
-  { mode = "n", keys = "<leader>l", desc = "+Language" },
-  { mode = "n", keys = "<leader>o", desc = "+Other" },
-  { mode = "n", keys = "<leader>s", desc = "+Session" },
-  { mode = "n", keys = "<leader>t", desc = "+Terminal" },
-}
-
-Config.localleader_group_clues = {
-  { mode = "n", keys = "<localleader>l", desc = "+VimTex" },
-}
 
 -- Toggle quickfix/localfix list
 map("n", "<leader>oq", function()

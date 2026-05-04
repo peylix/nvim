@@ -94,6 +94,22 @@ require("mini.cursorword").setup()
 
 local miniclue = require("mini.clue")
 
+Config.leader_group_clues = {
+  { mode = "n", keys = "<leader>a", desc = "+AI" },
+  { mode = "n", keys = "<leader>b", desc = "+Buffer" },
+  { mode = "n", keys = "<leader>e", desc = "+Explore" },
+  { mode = "n", keys = "<leader>f", desc = "+Find" },
+  { mode = "n", keys = "<leader>g", desc = "+Git" },
+  { mode = "n", keys = "<leader>l", desc = "+Language" },
+  { mode = "n", keys = "<leader>o", desc = "+Other" },
+  { mode = "n", keys = "<leader>s", desc = "+Session" },
+  { mode = "n", keys = "<leader>t", desc = "+Terminal" },
+}
+
+Config.localleader_group_clues = {
+  { mode = "n", keys = "<localleader>l", desc = "+VimTex" },
+}
+
 miniclue.setup({
   -- Define which clues to show. By default shows only clues for custom mappings
   -- (uses `desc` field from the mapping; takes precedence over custom clue).

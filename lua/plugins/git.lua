@@ -105,5 +105,10 @@ gitsigns.setup({
 
     -- Text object
     gsmap({ "o", "x" }, "ih", gitsigns.select_hunk, { desc = "Select Git hunk" })
+
+    -- for mini.clue
+    pcall(function()
+      require("mini.clue").ensure_buf_triggers(bufnr)
+    end)
   end,
 })
