@@ -45,7 +45,7 @@ for i = 1, #keys do
   local key = keys:sub(i, i)
   map("n", string.format("<C-%s>", key), function()
     require("buffer_manager.ui").nav_file(i)
-  end, { noremap = true })
+  end, { desc = "Go to the file with target number" })
 end
 
 ---- Open menu and search
@@ -55,7 +55,7 @@ map("n", "<leader>bs", function()
   vim.defer_fn(function()
     vim.fn.feedkeys("/")
   end, 50)
-end, { noremap = true, desc = "Search in buffer menu" })
+end, { desc = "Search in buffer menu" })
 
 -- Use blue color for modified files
 vim.api.nvim_set_hl(0, "BufferManagerModified", { fg = "#51afef", bold = true })

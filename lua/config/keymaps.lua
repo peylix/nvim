@@ -7,15 +7,15 @@ map("n", "]p", '<cmd>exe "iput " . v:register<CR>', { desc = "Paste Below" })
 -- Move to the end of the line if this is the last line
 map({ "n", "x" }, "j", function()
   return vim.fn.line(".") == vim.fn.line("$") and "$" or "j"
-end, { expr = true, noremap = true, desc = "Move to EOL on last line, else move down" })
+end, { expr = true, desc = "Move to EOL on last line, else move down" })
 
 -- Move to the beginning of the line if this is the first line
 map({ "n", "x" }, "k", function()
   return vim.fn.line(".") == 1 and "0" or "k"
-end, { expr = true, noremap = true, desc = "Move to BOL on first line, else move up" })
+end, { expr = true, desc = "Move to BOL on first line, else move up" })
 
 -- Remapping keybindings for moving to the end of line
-map({ "n", "x" }, "-", "$", { noremap = true, desc = "Move to end of line" })
+map({ "n", "x" }, "-", "$", { desc = "Move to end of line" })
 
 -- <leader>/ for commenting the current line or the selected area
 map("n", "<leader>/", "gcc", { remap = true, desc = "Toggle comment line" })
@@ -34,24 +34,14 @@ map("n", "|", "<cmd>vsplit<CR>", { desc = "Vertical split" })
 map("n", "\\", "<cmd>split<CR>", { desc = "Horizontal split" })
 
 -- Use tab for indent
-map("v", "<Tab>", ">gv", { noremap = true, silent = true, desc = "Indent selection" })
-map("v", "<S-Tab>", "<gv", { noremap = true, silent = true, desc = "Outdent selection" })
+map("v", "<Tab>", ">gv", { silent = true, desc = "Indent selection" })
+map("v", "<S-Tab>", "<gv", { silent = true, desc = "Outdent selection" })
 
 -- Close buffer
-map(
-  "n",
-  "<leader>c",
-  "<cmd>bdelete<CR>",
-  { noremap = true, silent = true, desc = "Close buffer" }
-)
+map("n", "<leader>c", "<cmd>bdelete<CR>", { silent = true, desc = "Close buffer" })
 
 -- Hide window
-map(
-  "n",
-  "<leader>h",
-  "<cmd>hide<CR>",
-  { noremap = true, silent = true, desc = "Hide window" }
-)
+map("n", "<leader>h", "<cmd>hide<CR>", { silent = true, desc = "Hide window" })
 
 -- New terminal buffer
 map("n", "<leader>tn", "<cmd>te<CR>", { desc = "New terminal" })
@@ -131,12 +121,7 @@ map("n", "<leader>tr", function()
 end, { desc = "Rename this terminal" })
 
 -- Restart Neovim
-map(
-  "n",
-  "<leader>or",
-  "<cmd>restart<CR>",
-  { noremap = true, silent = true, desc = "Restart Neovim" }
-)
+map("n", "<leader>or", "<cmd>restart<CR>", { silent = true, desc = "Restart Neovim" })
 
 -- Create new tab
 map("n", "<leader>bT", "<cmd>tabnew<CR>", { desc = "New tab" })
