@@ -1,3 +1,6 @@
+-- Reduce startup time with this experimental Lua module loader
+vim.loader.enable()
+
 -- Define a global config table for passing data across modules
 -- It can be used as `_G.config` and `Config`
 _G.Config = {}
@@ -24,19 +27,6 @@ require("vim._core.ui2").enable({
   enable = true,
   msg = {
     targets = "msg",
-    cmd = { -- Options related to messages in the cmdline window.
-      height = 0.5, -- Maximum height while expanded for messages beyond 'cmdheight'.
-    },
-    dialog = { -- Options related to dialog window.
-      height = 0.5, -- Maximum height.
-    },
-    msg = { -- Options related to msg window.
-      height = 0.5, -- Maximum height.
-      timeout = 4000, -- Time a message is visible in the message window.
-    },
-    pager = { -- Options related to message window.
-      height = 1, -- Maximum height.
-    },
   },
 })
 
