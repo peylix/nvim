@@ -231,15 +231,60 @@ local function dial(fn)
     vim.pack.add({ "https://github.com/monaqa/dial.nvim" })
     local augend = require("dial.augend")
     require("dial.config").augends:register_group({
-      -- default augends used when no group name is specified
       default = {
         augend.integer.alias.decimal, -- nonnegative decimal number
+        augend.integer.alias.decimal_int, -- nonnegative and negative decimal number
         augend.integer.alias.hex, -- nonnegative hex number
         augend.constant.alias.bool, -- boolean value (true <-> false)
+        augend.constant.alias.Bool,
+        augend.constant.alias.en_weekday, -- Mon, Tue, ..., Sat, Sun
+        augend.constant.alias.en_weekday_full,
         -- date (2022/02/19, etc.)
         augend.date.new({
           pattern = "%Y/%m/%d",
           default_kind = "day",
+        }),
+        augend.hexcolor.new({
+          case = "prefer_upper",
+        }),
+      },
+    })
+    require("dial.config").augends:on_filetype({
+      typescript = {
+        augend.constant.new({ elements = { "let", "const" } }),
+      },
+      javascript = {
+        augend.constant.new({ elements = { "let", "const" } }),
+      },
+      typescriptreact = {
+        augend.constant.new({ elements = { "let", "const" } }),
+      },
+      javascriptreact = {
+        augend.constant.new({ elements = { "let", "const" } }),
+      },
+      markdown = {
+        augend.constant.new({
+          elements = { "[ ]", "[x]" },
+          word = false,
+          cyclic = true,
+        }),
+        augend.misc.alias.markdown_header,
+      },
+      json = {
+        augend.semver.alias.semver,
+      },
+      lua = {
+        augend.constant.new({
+          elements = { "and", "or" },
+          word = true,
+          cyclic = true,
+        }),
+      },
+      python = {
+        augend.constant.new({
+          elements = { "and", "or" },
+          word = true,
+          cyclic = true,
         }),
       },
     })
