@@ -162,6 +162,7 @@ local function dial(fn)
         augend.constant.alias.Bool,
         augend.constant.alias.en_weekday, -- Mon, Tue, ..., Sat, Sun
         augend.constant.alias.en_weekday_full,
+        augend.semver.alias.semver, -- semantic versions
         -- date (2022/02/19, etc.)
         augend.date.new({
           pattern = "%Y/%m/%d",
@@ -173,19 +174,17 @@ local function dial(fn)
       },
     })
     require("dial.config").augends:on_filetype({
-      typescript = {
-        augend.constant.new({ elements = { "let", "const" } }),
-      },
-      javascript = {
-        augend.constant.new({ elements = { "let", "const" } }),
-      },
-      typescriptreact = {
-        augend.constant.new({ elements = { "let", "const" } }),
-      },
-      javascriptreact = {
-        augend.constant.new({ elements = { "let", "const" } }),
-      },
       markdown = {
+        augend.integer.alias.decimal,
+        augend.integer.alias.decimal_int,
+        augend.integer.alias.hex,
+        augend.constant.alias.en_weekday,
+        augend.constant.alias.en_weekday_full,
+        augend.semver.alias.semver,
+        augend.date.new({
+          pattern = "%Y/%m/%d",
+          default_kind = "day",
+        }),
         augend.constant.new({
           elements = { "[ ]", "[x]" },
           word = false,
@@ -193,25 +192,8 @@ local function dial(fn)
         }),
         augend.misc.alias.markdown_header,
       },
-      json = {
-        augend.semver.alias.semver,
-      },
-      lua = {
-        augend.constant.new({
-          elements = { "and", "or" },
-          word = true,
-          cyclic = true,
-        }),
-      },
-      python = {
-        augend.constant.new({
-          elements = { "and", "or" },
-          word = true,
-          cyclic = true,
-        }),
-      },
+      fn(),
     })
-    fn()
   end
 end
 
