@@ -134,7 +134,7 @@ miniclue.setup({
     { mode = { "n", "x" }, keys = "<localleader>" }, -- Leader triggers
     { mode = "n", keys = "\\" }, -- mini.basics
     { mode = { "n", "x" }, keys = "]" },
-    { mode = "i", keys = "<C-x>" }, -- Built-in completion
+    -- { mode = "i", keys = "<C-x>" }, -- Built-in completion
     { mode = { "n", "x" }, keys = "g" }, -- `g` key
     { mode = { "n", "x" }, keys = "'" }, -- Marks
     { mode = { "n", "x" }, keys = "`" },

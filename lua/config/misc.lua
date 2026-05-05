@@ -1,5 +1,8 @@
+local autocmd = vim.api.nvim_create_autocmd
+local usercmd = vim.api.nvim_create_user_command
+
 -- highlight yanked lines
-vim.api.nvim_create_autocmd("TextYankPost", {
+autocmd("TextYankPost", {
   group = Config.augr,
   pattern = "*",
   callback = function()
@@ -9,11 +12,11 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 -- User commands for vim.pack
-vim.api.nvim_create_user_command("PackUpdate", function()
+usercmd("PackUpdate", function()
   vim.pack.update()
 end, { desc = "Update plugins" })
 
-vim.api.nvim_create_user_command("PackCheck", function()
+usercmd("PackCheck", function()
   vim.pack.update(nil, { offline = true })
 end, { desc = "Check for plugin states" })
 
@@ -25,7 +28,7 @@ local address_default = "127.0.0.1:5567"
 -- if no [address] is provided, `address_default` will be used.
 -- connect to the server with `nvim --server [address] --remote-ui`
 -- or with `:connect [address]`
-vim.api.nvim_create_user_command("ServerStart", function(opts)
+usercmd("ServerStart", function(opts)
   local address = opts.args ~= "" and opts.args or address_default
   vim.fn.jobstart({ "nvim", "--listen", address, "--headless" }, { detach = true })
   vim.notify("Headless server started on " .. address)

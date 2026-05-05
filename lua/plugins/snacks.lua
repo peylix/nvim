@@ -230,15 +230,3 @@ end, { desc = "Toggle Scratch Buffer" })
 map("n", "<leader>bA", function()
   Snacks.scratch.select()
 end, { desc = "Select Scratch Buffer" })
-
--- map("n", "<leader>tn", function()
---   Snacks.terminal.open()
--- end, { desc = "New terminal" })
-
--- map("n", "<leader>tt", function()
---   Snacks.terminal.toggle()
--- end, { desc = "Toggle terminal" })
-
--- map("n", "<leader>tl", function()
---   Snacks.terminal.list()
--- end, { desc = "List terminal" })
