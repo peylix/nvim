@@ -27,8 +27,8 @@ end, { desc = "Working directory" })
 
 map("n", "<leader>ee", function()
   local this_buffer = vim.api.nvim_buf_get_name(0)
-  -- avoid mini.files get confused with "ministarter:/1/welcome"
-  if vim.startswith(this_buffer, "ministarter") then
+  -- avoid mini.files get confused with "ministarter:" or "term:"
+  if not vim.startswith(this_buffer, "/") then
     vim.notify("Enter a file first", vim.log.levels.WARN)
     return
   end
@@ -188,16 +188,3 @@ map("n", "<leader>sn", "<cmd>lua " .. session_new .. "<CR>", { desc = "New" })
 map("n", "<leader>sr", '<cmd>lua MiniSessions.select("read")<CR>', { desc = "Read" })
 map("n", "<leader>sR", "<cmd>lua MiniSessions.restart()<CR>", { desc = "Restart" })
 map("n", "<leader>sw", "<cmd>lua MiniSessions.write()<CR>", { desc = "Write current" })
-
--- require("mini.diff").setup({
---   view = {
---     style = "sign",
---     signs = { add = "┃", change = "┃", delete = "┃" },
---   },
---   map(
---     "n",
---     "<leader>gd",
---     "<cmd>lua MiniDiff.toggle_overlay()<CR>",
---     { desc = "Toggle diff overlay" }
---   ),
--- })
