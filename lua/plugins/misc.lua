@@ -49,7 +49,7 @@ for i = 1, #keys do
 end
 
 ---- Open menu and search
-map({ "t", "n" }, "<leader>bs", function()
+map("n", "<leader>bs", function()
   require("buffer_manager.ui").toggle_quick_menu()
   -- wait for the menu to open
   vim.defer_fn(function()
