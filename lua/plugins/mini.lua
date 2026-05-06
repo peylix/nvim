@@ -27,13 +27,22 @@ end, { desc = "Working directory" })
 
 map("n", "<leader>ee", function()
   local this_buffer = vim.api.nvim_buf_get_name(0)
-  -- avoid mini.files get confused with "ministarter:" or "term:"
+  -- Open the working directory if current buffer does not start with a file path
   if not vim.startswith(this_buffer, "/") then
-    vim.notify("Enter a file first", vim.log.levels.WARN)
+    MiniFiles.open()
     return
   end
   MiniFiles.open(this_buffer)
 end, { desc = "Current file" })
+
+vim.api.nvim_create_autocmd("User", {
+  pattern = "MiniFilesBufferCreate",
+  callback = function(args)
+    local buf_id = args.data.buf_id
+    map("n", "<C-h>", "h", { buffer = buf_id, desc = "Move cursor left in mini.files" })
+    map("n", "<C-l>", "l", { buffer = buf_id, desc = "Move cursor right in mini.files" })
+  end,
+})
 
 local minitrailspace = require("mini.trailspace")
 minitrailspace.setup()
