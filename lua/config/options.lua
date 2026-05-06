@@ -29,15 +29,20 @@ o.ruler = false
 o.shortmess = "CFOSWaco" -- disable some completion messages
 o.showmode = false
 o.signcolumn = "yes" -- always show signcolumn
+o.splitright = true -- vertical splits should be placed to the right
 o.splitbelow = true -- horizontal splits should be placed below
 o.splitkeep = "screen"
-o.splitright = true -- reduce splits should be placed to the right
 o.winborder = "single" -- use border in floating windows
 o.wrap = false -- do not visually wrap lines
 o.cmdheight = 0
 o.laststatus = 2
 
 o.cursorlineopt = "screenline,number" -- show cursor line per screen line
+
+o.title = true -- Enable titles
+o.titlelen = 0 -- avoid cutoff
+o.titlestring = '%{fnamemodify(getcwd(),":t")}' -- set the title to current working dir
+
 
 o.list = true -- show whitespace characters
 

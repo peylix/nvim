@@ -1,4 +1,6 @@
 local map = vim.keymap.set
+local autocmd = vim.api.nvim_create_autocmd
+local usercmd = vim.api.nvim_create_user_command
 
 -- mini.nvim
 vim.pack.add({ "https://github.com/nvim-mini/mini.nvim" })
@@ -35,7 +37,7 @@ map("n", "<leader>ee", function()
   MiniFiles.open(this_buffer)
 end, { desc = "Current file" })
 
-vim.api.nvim_create_autocmd("User", {
+autocmd("User", {
   pattern = "MiniFilesBufferCreate",
   callback = function(args)
     local buf_id = args.data.buf_id
@@ -46,17 +48,17 @@ vim.api.nvim_create_autocmd("User", {
 
 local minitrailspace = require("mini.trailspace")
 minitrailspace.setup()
-vim.api.nvim_create_user_command("TrimWhitespace", MiniTrailspace.trim, {
+usercmd("TrimWhitespace", MiniTrailspace.trim, {
   desc = "Trim trailing whitespace from all lines in the current buffer using Mini.Trailspace",
 })
-vim.api.nvim_create_user_command("TrimLastLine", MiniTrailspace.trim_last_lines, {
+usercmd("TrimLastLine", MiniTrailspace.trim_last_lines, {
   desc = "Trim last lines that are empty or contain only whitespace using Mini.Trailspace",
 })
 
 -- set color for trailing whitespace and ensure it stays the same across colorschemes
 local trailspace_color = "#4C1036"
 vim.api.nvim_set_hl(0, "MiniTrailspace", { bg = trailspace_color })
-vim.api.nvim_create_autocmd("ColorScheme", {
+autocmd("ColorScheme", {
   group = Config.augr,
   pattern = "*",
   callback = function()
@@ -91,7 +93,7 @@ MiniPairs.map("i", "<", {
 MiniPairs.map("i", ">", { action = "close", pair = "<>", register = { cr = false } })
 
 -- Create symmetrical `$$` pair only in Tex files
-vim.api.nvim_create_autocmd("FileType", {
+autocmd("FileType", {
   group = Config.augr,
   pattern = "tex",
   callback = function()
@@ -170,7 +172,7 @@ require("mini.starter").setup({
 })
 
 -- ensure mini.clue is available on mini.starter
-vim.api.nvim_create_autocmd("User", {
+autocmd("User", {
   pattern = "MiniStarterOpened",
   callback = function(event)
     MiniClue.enable_buf_triggers(event.buf)

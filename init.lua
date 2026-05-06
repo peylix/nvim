@@ -30,7 +30,7 @@ require("vim._core.ui2").enable({
   },
 })
 
--- Add configs
+-- Load configs
 require("config.colorschemes")
 require("config.options")
 require("config.keymaps")

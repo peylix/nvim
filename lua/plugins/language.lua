@@ -1,4 +1,5 @@
 local map = vim.keymap.set
+local autocmd = vim.api.nvim_create_autocmd
 
 -- nvim-treesitter
 local ts_update = function()
@@ -55,7 +56,7 @@ else
   vim.notify("Tree-sitter CLI not found. Skipping parser install.", vim.log.levels.WARN)
 end
 
-vim.api.nvim_create_autocmd("FileType", {
+autocmd("FileType", {
   group = Config.augr,
   pattern = filetypes,
   callback = function()
@@ -144,7 +145,7 @@ require("conform").setup({
 
 if not Config.profile_is_reduced then
   -- VimTex
-  vim.api.nvim_create_autocmd("FileType", {
+  autocmd("FileType", {
     group = Config.augr,
     pattern = { "plaintex", "tex" },
     once = true,
@@ -164,7 +165,7 @@ if not Config.profile_is_reduced then
   })
 
   -- typst-preview.nvim
-  vim.api.nvim_create_autocmd("FileType", {
+  autocmd("FileType", {
     group = Config.augr,
     pattern = "typst",
     once = true,
