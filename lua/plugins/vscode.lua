@@ -1,9 +1,10 @@
 local map = vim.keymap.set
+local add = vim.pack.add
 
 -- flash.nvim
 local function flash(fn)
   return function()
-    vim.pack.add({ "https://github.com/folke/flash.nvim" })
+    add({ "https://github.com/folke/flash.nvim" })
     require("flash").setup()
     fn()
   end
@@ -55,7 +56,7 @@ map(
 )
 
 -- mini.nvim
-vim.pack.add({ "https://github.com/nvim-mini/mini.nvim" })
+add({ "https://github.com/nvim-mini/mini.nvim" })
 
 require("mini.ai").setup()
 
@@ -95,7 +96,7 @@ vim.api.nvim_create_autocmd("FileType", {
 -- im-select.nvim
 -- NOTE: make sure macism is installed
 if Config.profile_is_default and vim.fn.has("mac") == 1 then
-  vim.pack.add({ "https://github.com/keaising/im-select.nvim" })
+  add({ "https://github.com/keaising/im-select.nvim" })
 
   require("im_select").setup({
     default_im_select = "com.apple.keylayout.US",
@@ -109,7 +110,7 @@ end
 -- nvim-spider
 local function spider(fn)
   return function()
-    vim.pack.add({ "https://github.com/chrisgrieser/nvim-spider" })
+    add({ "https://github.com/chrisgrieser/nvim-spider" })
     require("spider").setup()
     fn()
   end
@@ -151,7 +152,7 @@ map(
 -- dial.nvim
 local function dial(fn)
   return function()
-    vim.pack.add({ "https://github.com/monaqa/dial.nvim" })
+    add({ "https://github.com/monaqa/dial.nvim" })
     local augend = require("dial.augend")
     require("dial.config").augends:register_group({
       default = {

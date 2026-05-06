@@ -1,9 +1,10 @@
 local map = vim.keymap.set
+local add = vim.pack.add
 
 -- flash.nvim
 local function flash(fn)
   return function()
-    vim.pack.add({ "https://github.com/folke/flash.nvim" })
+    add({ "https://github.com/folke/flash.nvim" })
     require("flash").setup()
     fn()
   end
@@ -55,7 +56,7 @@ map(
 )
 
 -- blink.cmp
-vim.pack.add({
+add({
   "https://github.com/rafamadriz/friendly-snippets",
   "https://github.com/fang2hou/blink-copilot",
 
@@ -186,7 +187,7 @@ require("blink.cmp").setup({
 -- nvim-spider
 local function spider(fn)
   return function()
-    vim.pack.add({ "https://github.com/chrisgrieser/nvim-spider" })
+    add({ "https://github.com/chrisgrieser/nvim-spider" })
     require("spider").setup()
     fn()
   end
@@ -228,7 +229,7 @@ map(
 -- dial.nvim
 local function dial(fn)
   return function()
-    vim.pack.add({ "https://github.com/monaqa/dial.nvim" })
+    add({ "https://github.com/monaqa/dial.nvim" })
     local augend = require("dial.augend")
     require("dial.config").augends:register_group({
       default = {

@@ -1,7 +1,8 @@
 local map = vim.keymap.set
+local add = vim.pack.add
 
 -- lualine.nvim
-vim.pack.add({
+add({
   "https://github.com/nvim-mini/mini.nvim",
   "https://github.com/nvim-lualine/lualine.nvim",
 })
@@ -277,7 +278,7 @@ vim.api.nvim_create_autocmd({ "RecordingEnter", "RecordingLeave" }, {
 })
 
 -- comfy-line-numbers.nvim
-vim.pack.add({ "https://github.com/mluders/comfy-line-numbers.nvim" })
+add({ "https://github.com/mluders/comfy-line-numbers.nvim" })
 
 require("comfy-line-numbers").setup({
   labels = {
@@ -356,11 +357,11 @@ require("comfy-line-numbers").setup({
 })
 
 -- numb.nvim
-vim.pack.add({ "https://github.com/nacro90/numb.nvim" })
+add({ "https://github.com/nacro90/numb.nvim" })
 require("numb").setup()
 
 -- glance.nvim
-vim.pack.add({ "https://github.com/dnlhc/glance.nvim" })
+add({ "https://github.com/dnlhc/glance.nvim" })
 require("glance").setup()
 map("n", "gD", "<CMD>Glance definitions<CR>")
 map("n", "gR", "<CMD>Glance references<CR>")
@@ -368,11 +369,11 @@ map("n", "gY", "<CMD>Glance type_definitions<CR>")
 map("n", "gM", "<CMD>Glance implementations<CR>")
 
 -- modes.nvim
-vim.pack.add({ "https://github.com/mvllow/modes.nvim" })
+add({ "https://github.com/mvllow/modes.nvim" })
 require("modes").setup()
 
 -- render-markdown.nvim
-vim.pack.add({
+add({
   "https://github.com/nvim-treesitter/nvim-treesitter",
   "https://github.com/nvim-mini/mini.nvim",
   "https://github.com/MeanderingProgrammer/render-markdown.nvim",
@@ -380,7 +381,7 @@ vim.pack.add({
 require("render-markdown").setup({})
 
 -- todo-comments.nvim
-vim.pack.add({
+add({
   "https://github.com/nvim-lua/plenary.nvim",
   "https://github.com/folke/todo-comments.nvim",
 })
@@ -398,7 +399,7 @@ map("n", "[t", function()
 end, { desc = "Previous todo comment" })
 
 -- fidget.nvim
-vim.pack.add({ "https://github.com/j-hui/fidget.nvim" })
+add({ "https://github.com/j-hui/fidget.nvim" })
 require("fidget").setup({
   notification = {
     override_vim_notify = true,

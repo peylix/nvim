@@ -1,5 +1,6 @@
 local map = vim.keymap.set
 local autocmd = vim.api.nvim_create_autocmd
+local add = vim.pack.add
 
 -- nvim-treesitter
 local ts_update = function()
@@ -7,7 +8,7 @@ local ts_update = function()
 end
 Config.on_packchanged("nvim-treesitter", { "update" }, ts_update, ":TSUpdate")
 
-vim.pack.add({
+add({
   "https://github.com/nvim-treesitter/nvim-treesitter",
   "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
   "https://github.com/nvim-treesitter/nvim-treesitter-context",
@@ -74,10 +75,10 @@ autocmd("FileType", {
 })
 
 -- nvim-lspconfig
-vim.pack.add({ "https://github.com/neovim/nvim-lspconfig" })
+add({ "https://github.com/neovim/nvim-lspconfig" })
 
 -- mason.nvim
-vim.pack.add({ "https://github.com/mason-org/mason.nvim" })
+add({ "https://github.com/mason-org/mason.nvim" })
 
 require("mason").setup({
   ui = {
@@ -125,7 +126,7 @@ vim.lsp.inlay_hint.enable(true) -- enable inlay hints
 vim.lsp.semantic_tokens.enable(true) -- enable semantic tokens
 
 -- nvim-lint
-vim.pack.add({ "https://github.com/mfussenegger/nvim-lint" })
+add({ "https://github.com/mfussenegger/nvim-lint" })
 
 require("lint").linters_by_ft = {
   lua = { "selene" },
@@ -133,7 +134,7 @@ require("lint").linters_by_ft = {
 }
 
 -- conform.nvim
-vim.pack.add({ "https://github.com/stevearc/conform.nvim" })
+add({ "https://github.com/stevearc/conform.nvim" })
 
 require("conform").setup({
   default_format_opts = {
@@ -152,7 +153,7 @@ if not Config.profile_is_reduced then
     pattern = { "plaintex", "tex" },
     once = true,
     callback = function()
-      vim.pack.add({
+      add({
         "https://github.com/lervag/vimtex",
       })
 
@@ -172,7 +173,7 @@ if not Config.profile_is_reduced then
     pattern = "typst",
     once = true,
     callback = function()
-      vim.pack.add({
+      add({
         {
           src = "https://github.com/chomosuke/typst-preview.nvim",
           version = vim.version.range("^1"),

@@ -1,9 +1,10 @@
 if Config.profile_is_reduced then return {} end
 
 local map = vim.keymap.set
+local add = vim.pack.add
 
 -- copilot.lua
--- vim.pack.add({
+-- add({
 --   "https://github.com/copilotlsp-nvim/copilot-lsp",
 --   "https://github.com/zbirenbaum/copilot.lua",
 -- })
@@ -42,7 +43,7 @@ local map = vim.keymap.set
 -- })
 
 -- sidekick.nvim
-vim.pack.add({ "https://github.com/folke/sidekick.nvim" })
+add({ "https://github.com/folke/sidekick.nvim" })
 
 require("sidekick").setup()
 
