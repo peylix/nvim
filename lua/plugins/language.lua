@@ -92,7 +92,9 @@ require("mason").setup({
 -- for diagnostics icons
 vim.diagnostic.config({
   virtual_text = false,
-  underline = true,
+  severity_sort = true,
+  float = true,
+  underline = { severity = { min = vim.diagnostic.severity.WARN } },
   virtual_lines = {
     current_line = true,
   },

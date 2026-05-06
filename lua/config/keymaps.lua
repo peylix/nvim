@@ -22,7 +22,7 @@ map("n", "<leader>/", "gcc", { remap = true, desc = "Toggle comment line" })
 map("x", "<leader>/", "gc", { remap = true, desc = "Toggle comment selection" })
 
 -- Clear search highlights after pressing <Esc>
-map("n", "<Esc>", "<cmd>nohlsearch<CR><Esc>", { desc = "Clear search highlight" })
+map("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlight" })
 
 -- Window related operations
 map({ "n", "t" }, "<C-h>", "<C-w>h", { desc = "Left window" })
