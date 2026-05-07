@@ -78,7 +78,7 @@
       "src": "https://github.com/mvllow/modes.nvim"
     },
     "neogit": {
-      "rev": "f8bcc625fe1b9bd55f7853820fddac9b0996f697",
+      "rev": "e74dfb42c04b493031f323aec8fa5f28b0427b9e",
       "src": "https://github.com/neogitorg/neogit"
     },
     "nightfox.nvim": {
@@ -106,7 +106,7 @@
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-treesitter-context": {
-      "rev": "b0c45cefe2c8f7b55fc46f34e563bc428ef99636",
+      "rev": "b311b30818951d01f7b4bf650521b868b3fece16",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-context"
     },
     "nvim-treesitter-textobjects": {

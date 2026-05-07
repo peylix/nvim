@@ -124,6 +124,7 @@ vim.lsp.enable({
 vim.lsp.codelens.enable(true) -- enable codelens
 vim.lsp.inlay_hint.enable(true) -- enable inlay hints
 vim.lsp.semantic_tokens.enable(true) -- enable semantic tokens
+vim.lsp.document_color.enable(true, nil, { style = "virtual" })
 
 -- nvim-lint
 add({ "https://github.com/mfussenegger/nvim-lint" })

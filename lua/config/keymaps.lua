@@ -43,6 +43,9 @@ map("n", "<leader>c", "<cmd>bdelete<CR>", { silent = true, desc = "Close buffer"
 -- Hide window
 map("n", "<leader>h", "<cmd>hide<CR>", { silent = true, desc = "Hide window" })
 
+-- Hide other window(s)
+map("n", "<leader>H", "<cmd>only<CR>", { silent = true, desc = "Hide other window(s)" })
+
 -- New terminal buffer
 map("n", "<leader>tn", "<cmd>te<CR>", { desc = "New terminal" })
 
