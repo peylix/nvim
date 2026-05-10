@@ -34,14 +34,14 @@ add({ "https://github.com/lewis6991/gitsigns.nvim" })
 local gitsigns = require("gitsigns")
 gitsigns.setup({
   on_attach = function(bufnr)
-    local function gsmap(mode, l, r, opts)
+    local function bmap(mode, l, r, opts)
       opts = opts or {}
       opts.buffer = bufnr
       map(mode, l, r, opts)
     end
 
     -- Navigation
-    gsmap("n", "]c", function()
+    bmap("n", "]c", function()
       if vim.wo.diff then
         vim.cmd.normal({ "]c", bang = true })
       else
@@ -49,7 +49,7 @@ gitsigns.setup({
       end
     end, { desc = "Go to next Git hunk" })
 
-    gsmap("n", "[c", function()
+    bmap("n", "[c", function()
       if vim.wo.diff then
         vim.cmd.normal({ "[c", bang = true })
       else
@@ -58,54 +58,54 @@ gitsigns.setup({
     end, { desc = "Go to previous Git hunk" })
 
     -- Actions
-    gsmap("n", "<leader>gs", gitsigns.stage_hunk, { desc = "Stage Git hunk" })
-    gsmap("n", "<leader>gr", gitsigns.reset_hunk, { desc = "Reset Git hunk" })
+    bmap("n", "<leader>gs", gitsigns.stage_hunk, { desc = "Stage Git hunk" })
+    bmap("n", "<leader>gr", gitsigns.reset_hunk, { desc = "Reset Git hunk" })
 
-    gsmap("v", "<leader>gs", function()
+    bmap("v", "<leader>gs", function()
       gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
     end, { desc = "Stage selected Git hunk" })
 
-    gsmap("v", "<leader>gr", function()
+    bmap("v", "<leader>gr", function()
       gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
     end, { desc = "Reset selected Git hunk" })
 
-    gsmap("n", "<leader>gS", gitsigns.stage_buffer, { desc = "Stage Git buffer" })
-    gsmap("n", "<leader>gR", gitsigns.reset_buffer, { desc = "Reset Git buffer" })
-    gsmap("n", "<leader>gp", gitsigns.preview_hunk, { desc = "Preview Git hunk" })
-    gsmap(
+    bmap("n", "<leader>gS", gitsigns.stage_buffer, { desc = "Stage Git buffer" })
+    bmap("n", "<leader>gR", gitsigns.reset_buffer, { desc = "Reset Git buffer" })
+    bmap("n", "<leader>gp", gitsigns.preview_hunk, { desc = "Preview Git hunk" })
+    bmap(
       "n",
       "<leader>gk",
       gitsigns.preview_hunk_inline,
       { desc = "Preview Git hunk inline" }
     )
 
-    gsmap("n", "<leader>ga", function()
+    bmap("n", "<leader>ga", function()
       gitsigns.blame_line({ full = true })
     end, { desc = "Show Git blame for line" })
 
-    gsmap("n", "<leader>gd", gitsigns.diffthis, { desc = "Diff Git file" })
+    bmap("n", "<leader>gd", gitsigns.diffthis, { desc = "Diff Git file" })
 
-    gsmap("n", "<leader>gD", function()
+    bmap("n", "<leader>gD", function()
       gitsigns.diffthis("~")
     end, { desc = "Diff Git file against previous commit" })
 
-    gsmap("n", "<leader>gF", function()
+    bmap("n", "<leader>gF", function()
       gitsigns.setqflist("all")
     end, { desc = "Add all Git hunks to quickfix" })
-    gsmap("n", "<leader>gf", gitsigns.setqflist, { desc = "Add Git hunks to quickfix" })
+    bmap("n", "<leader>gf", gitsigns.setqflist, { desc = "Add Git hunks to quickfix" })
 
     -- Toggles
-    gsmap(
+    bmap(
       "n",
       "<leader>gl",
       gitsigns.toggle_current_line_blame,
       { desc = "Toggle Git line blame" }
     )
-    gsmap("n", "<leader>gw", gitsigns.toggle_word_diff, { desc = "Toggle Git word diff" })
-    gsmap("n", "<leader>gL", gitsigns.blame, { desc = "Toggle blame view" })
+    bmap("n", "<leader>gw", gitsigns.toggle_word_diff, { desc = "Toggle Git word diff" })
+    bmap("n", "<leader>gL", gitsigns.blame, { desc = "Toggle blame view" })
 
     -- Text object
-    gsmap({ "o", "x" }, "ih", gitsigns.select_hunk, { desc = "Select Git hunk" })
+    bmap({ "o", "x" }, "ih", gitsigns.select_hunk, { desc = "Select Git hunk" })
 
     -- for mini.clue
     pcall(function()

@@ -3,10 +3,9 @@ local autocmd = vim.api.nvim_create_autocmd
 local add = vim.pack.add
 
 -- nvim-treesitter
-local ts_update = function()
+Config.on_packchanged("nvim-treesitter", { "update" }, function()
   vim.cmd("TSUpdate")
-end
-Config.on_packchanged("nvim-treesitter", { "update" }, ts_update, ":TSUpdate")
+end, ":TSUpdate")
 
 add({
   "https://github.com/nvim-treesitter/nvim-treesitter",
