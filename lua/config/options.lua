@@ -43,7 +43,6 @@ o.title = true -- Enable titles
 o.titlelen = 0 -- avoid cutoff
 o.titlestring = '%{fnamemodify(getcwd(),":t")}' -- set the title to current working dir
 
-
 o.list = true -- show whitespace characters
 
 opt.listchars = {
@@ -75,7 +74,11 @@ o.virtualedit = "block"
 
 o.iskeyword = "@,48-57,_,192-255,-" -- treat dash as `word` textobject part
 
-o.clipboard = "unnamedplus" -- use system clipboard
+-- use system clipboard
+-- put this after `UiEnter` to reduce start up time
+vim.schedule(function()
+  o.clipboard = "unnamedplus"
+end)
 
 -- use xclip for clipboard on Linux
 if vim.fn.has("linux") == 1 then vim.g.clipboard = "xclip" end

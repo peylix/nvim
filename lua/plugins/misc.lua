@@ -3,8 +3,8 @@ local add = vim.pack.add
 
 -- buffer_manager
 add({
-  "https://github.com/nvim-lua/plenary.nvim",
-  "https://github.com/j-morano/buffer_manager.nvim",
+  Config.gh("nvim-lua/plenary.nvim"),
+  Config.gh("j-morano/buffer_manager.nvim"),
 })
 
 require("buffer_manager").setup({
@@ -64,7 +64,7 @@ vim.api.nvim_set_hl(0, "BufferManagerModified", { fg = "#51afef", bold = true })
 -- im-select.nvim
 -- NOTE: make sure macism is installed
 if Config.profile_is_default and vim.fn.has("mac") == 1 then
-  add({ "https://github.com/keaising/im-select.nvim" })
+  add({ Config.gh("keaising/im-select.nvim") })
 
   require("im_select").setup({
     default_im_select = "com.apple.keylayout.US",
@@ -76,4 +76,4 @@ if Config.profile_is_default and vim.fn.has("mac") == 1 then
 end
 
 -- vim-startuptime
-add({ "https://github.com/dstein64/vim-startuptime" })
+add({ Config.gh("dstein64/vim-startuptime") })

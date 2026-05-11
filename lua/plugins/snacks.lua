@@ -1,7 +1,7 @@
 local map = vim.keymap.set
 
 -- snacks.nvim
-vim.pack.add({ "https://github.com/folke/snacks.nvim" })
+vim.pack.add({ Config.gh("folke/snacks.nvim") })
 
 local snacks = require("snacks")
 

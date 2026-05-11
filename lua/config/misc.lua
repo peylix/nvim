@@ -51,3 +51,8 @@ if Config.profile_is_reduced then
     { title = "Profile" }
   )
 end
+
+-- helper function for plugin hosted on GitHub
+Config.gh = function(repo)
+  return "https://github.com/" .. repo
+end

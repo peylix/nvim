@@ -5,8 +5,8 @@ local add = vim.pack.add
 
 -- copilot.lua
 -- add({
---   "https://github.com/copilotlsp-nvim/copilot-lsp",
---   "https://github.com/zbirenbaum/copilot.lua",
+--   Config.gh("copilotlsp-nvim/copilot-lsp"),
+--   Config.gh("zbirenbaum/copilot.lua"),
 -- })
 --
 -- require("copilot").setup({
@@ -43,7 +43,7 @@ local add = vim.pack.add
 -- })
 
 -- sidekick.nvim
-add({ "https://github.com/folke/sidekick.nvim" })
+add({ Config.gh("folke/sidekick.nvim") })
 
 require("sidekick").setup()
 

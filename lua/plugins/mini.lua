@@ -3,7 +3,7 @@ local autocmd = vim.api.nvim_create_autocmd
 local usercmd = vim.api.nvim_create_user_command
 
 -- mini.nvim
-vim.pack.add({ "https://github.com/nvim-mini/mini.nvim" })
+vim.pack.add({ Config.gh("nvim-mini/mini.nvim") })
 
 -- Set up to not prefer extension-based icon for some extensions
 local ext3_blocklist = { scm = true, txt = true, yml = true }

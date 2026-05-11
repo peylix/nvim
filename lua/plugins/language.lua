@@ -8,9 +8,9 @@ Config.on_packchanged("nvim-treesitter", { "update" }, function()
 end, ":TSUpdate")
 
 add({
-  "https://github.com/nvim-treesitter/nvim-treesitter",
-  "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
-  "https://github.com/nvim-treesitter/nvim-treesitter-context",
+  Config.gh("nvim-treesitter/nvim-treesitter"),
+  Config.gh("nvim-treesitter/nvim-treesitter-textobjects"),
+  Config.gh("nvim-treesitter/nvim-treesitter-context"),
 })
 
 local ts_parser_default = {
@@ -74,10 +74,10 @@ autocmd("FileType", {
 })
 
 -- nvim-lspconfig
-add({ "https://github.com/neovim/nvim-lspconfig" })
+add({ Config.gh("neovim/nvim-lspconfig") })
 
 -- mason.nvim
-add({ "https://github.com/mason-org/mason.nvim" })
+add({ Config.gh("mason-org/mason.nvim") })
 
 require("mason").setup({
   ui = {
@@ -126,7 +126,7 @@ vim.lsp.semantic_tokens.enable(true) -- enable semantic tokens
 vim.lsp.document_color.enable(true, nil, { style = "virtual" })
 
 -- nvim-lint
-add({ "https://github.com/mfussenegger/nvim-lint" })
+add({ Config.gh("mfussenegger/nvim-lint") })
 
 require("lint").linters_by_ft = {
   lua = { "selene" },
@@ -134,7 +134,7 @@ require("lint").linters_by_ft = {
 }
 
 -- conform.nvim
-add({ "https://github.com/stevearc/conform.nvim" })
+add({ Config.gh("stevearc/conform.nvim") })
 
 require("conform").setup({
   default_format_opts = {
@@ -154,7 +154,7 @@ if not Config.profile_is_reduced then
     once = true,
     callback = function()
       add({
-        "https://github.com/lervag/vimtex",
+        Config.gh("lervag/vimtex"),
       })
 
       vim.g.vimtex_view_method = "skim"
@@ -175,7 +175,7 @@ if not Config.profile_is_reduced then
     callback = function()
       add({
         {
-          src = "https://github.com/chomosuke/typst-preview.nvim",
+          src = Config.gh("chomosuke/typst-preview.nvim"),
           version = vim.version.range("^1"),
         },
       })

@@ -5,9 +5,9 @@ local add = vim.pack.add
 local function neogit_config(fn)
   return function()
     add({
-      "https://github.com/esmuellert/codediff.nvim",
-      "https://github.com/folke/snacks.nvim",
-      "https://github.com/neogitorg/neogit",
+      Config.gh("esmuellert/codediff.nvim"),
+      Config.gh("folke/snacks.nvim"),
+      Config.gh("neogitorg/neogit"),
     })
 
     require("neogit").setup({
@@ -29,7 +29,7 @@ map(
 )
 
 -- gitsigns.nvim
-add({ "https://github.com/lewis6991/gitsigns.nvim" })
+add({ Config.gh("lewis6991/gitsigns.nvim") })
 
 local gitsigns = require("gitsigns")
 gitsigns.setup({
