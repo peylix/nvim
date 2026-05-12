@@ -405,3 +405,9 @@ require("fidget").setup({
     override_vim_notify = true,
   },
 })
+
+-- dropbar.nvim
+add({ Config.gh("Bekaboo/dropbar.nvim") })
+
+local dropbar_api = require("dropbar.api")
+vim.keymap.set("n", "<Leader>b;", dropbar_api.pick, { desc = "Pick symbols in winbar" })
