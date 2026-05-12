@@ -5,7 +5,6 @@ local add = vim.pack.add
 local function neogit_config(fn)
   return function()
     add({
-      Config.gh("esmuellert/codediff.nvim"),
       Config.gh("folke/snacks.nvim"),
       Config.gh("neogitorg/neogit"),
     })
@@ -14,6 +13,9 @@ local function neogit_config(fn)
       disable_line_numbers = false,
       disable_relative_line_numbers = false,
       graph_style = "kitty",
+      commit_view = {
+        kind = "auto",
+      },
     })
     fn()
   end
@@ -23,7 +25,7 @@ map(
   "n",
   "<leader>gg",
   neogit_config(function()
-    require("neogit").open()
+    require("neogit").open({ kind = "split" })
   end),
   { desc = "Show Neogit UI" }
 )
