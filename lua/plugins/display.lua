@@ -13,18 +13,18 @@ local lualine = require("lualine")
 -- Color table for highlights
 -- stylua: ignore
 local colors = {
-  bg       = "#070c30",
-  fg       = "#bbc2cf",
-  white    = "#ffffff",
-  yellow   = "#ECBE7B",
-  cyan     = "#008080",
+  bg = "#070c30",
+  fg = "#bbc2cf",
+  white = "#ffffff",
+  yellow = "#ECBE7B",
+  cyan = "#008080",
   darkblue = "#081633",
-  green    = "#98be65",
-  orange   = "#FF8800",
-  violet   = "#a9a1e1",
-  magenta  = "#c678dd",
-  blue     = "#51afef",
-  red      = "#ec5f67",
+  light_cyan = "#78ccc5",
+  orange = "#FF8800",
+  violet = "#a9a1e1",
+  magenta = "#c678dd",
+  blue = "#51afef",
+  red = "#ec5f67",
 }
 
 local conditions = {
@@ -47,9 +47,6 @@ local config = {
     component_separators = "",
     section_separators = "",
     theme = {
-      -- We are going to use lualine_c an lualine_x as left and
-      -- right section. Both are highlighted by c theme.  So we
-      -- are just setting default looks o statusline
       normal = { c = { fg = colors.fg, bg = colors.bg } },
       inactive = { c = { fg = colors.fg, bg = colors.bg } },
     },
@@ -71,13 +68,16 @@ local config = {
       {
         "filename",
         cond = conditions.buffer_not_empty,
-        color = { fg = colors.magenta, gui = "bold" },
+        color = { fg = colors.blue, gui = "bold" },
       },
+      { "location" },
     },
     lualine_x = {
       {
-        "location",
-        color = { fg = colors.fg, gui = "bold" },
+        "o:encoding",
+        fmt = string.upper,
+        cond = conditions.hide_in_width,
+        color = { fg = colors.light_cyan, gui = "bold" },
       },
     },
     lualine_y = {},
@@ -133,7 +133,7 @@ ins_left({
       noV = colors.fg,
       ["no\22"] = colors.fg,
 
-      i = colors.green,
+      i = colors.light_cyan,
 
       v = colors.magenta,
       V = colors.magenta,
@@ -228,7 +228,7 @@ ins_right({
     return ""
   end,
   icon = "󰔱",
-  color = { fg = colors.green, gui = "bold" },
+  color = { fg = colors.light_cyan, gui = "bold" },
 })
 
 -- Add components to right sections
@@ -236,14 +236,14 @@ ins_right({
   "o:encoding",
   fmt = string.upper,
   cond = conditions.hide_in_width,
-  color = { fg = colors.green, gui = "bold" },
+  color = { fg = colors.light_cyan, gui = "bold" },
 })
 
 -- ins_right({
 --   "fileformat",
 --   fmt = string.upper,
 --   icons_enabled = false,
---   color = { fg = colors.green, gui = "bold" },
+--   color = { fg = colors.light_cyan, gui = "bold" },
 -- })
 
 ins_right({
@@ -256,7 +256,7 @@ ins_right({
   "diff",
   symbols = { added = " ", modified = "󰝤 ", removed = " " },
   diff_color = {
-    added = { fg = colors.green },
+    added = { fg = colors.light_cyan },
     modified = { fg = colors.orange },
     removed = { fg = colors.red },
   },
