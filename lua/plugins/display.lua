@@ -20,11 +20,12 @@ local colors = {
   cyan = "#008080",
   darkblue = "#081633",
   light_cyan = "#78ccc5",
+  green = "#28ce65",
   orange = "#FF8800",
   violet = "#a9a1e1",
   magenta = "#c678dd",
   blue = "#51afef",
-  red = "#ec5f67",
+  red = "#ff3d48",
 }
 
 local conditions = {
@@ -228,7 +229,7 @@ ins_right({
     return ""
   end,
   icon = "󰔱",
-  color = { fg = colors.light_cyan, gui = "bold" },
+  color = { fg = colors.green, gui = "bold" },
 })
 
 -- Add components to right sections
@@ -256,7 +257,7 @@ ins_right({
   "diff",
   symbols = { added = " ", modified = "󰝤 ", removed = " " },
   diff_color = {
-    added = { fg = colors.light_cyan },
+    added = { fg = colors.green },
     modified = { fg = colors.orange },
     removed = { fg = colors.red },
   },
