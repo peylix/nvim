@@ -23,16 +23,11 @@ Config.on_packchanged = function(plugin_name, kinds, callback, desc)
 end
 
 -- Enable ui2
-require("vim._core.ui2").enable({
-  enable = true,
-  msg = {
-    targets = "msg",
-  },
-})
+require("vim._core.ui2").enable({ enable = true })
 
 -- Load configs
-require("config.colorschemes")
 require("config.options")
 require("config.keymaps")
 require("config.misc")
+require("config.colorschemes")
 require("plugins")

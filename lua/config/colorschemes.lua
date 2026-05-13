@@ -1,6 +1,6 @@
 vim.pack.add({
-  "https://github.com/yorumicolors/yorumi.nvim",
-  "https://github.com/EdenEast/nightfox.nvim",
+  Config.gh("yorumicolors/yorumi.nvim"),
+  Config.gh("EdenEast/nightfox.nvim"),
 })
 
 -- use yorumi colorscheme
