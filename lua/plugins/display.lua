@@ -78,7 +78,7 @@ local config = {
         "o:encoding",
         fmt = string.upper,
         cond = conditions.hide_in_width,
-        color = { fg = colors.light_cyan, gui = "bold" },
+        color = { fg = colors.fg, gui = "bold" },
       },
     },
     lualine_y = {},
@@ -237,7 +237,7 @@ ins_right({
   "o:encoding",
   fmt = string.upper,
   cond = conditions.hide_in_width,
-  color = { fg = colors.light_cyan, gui = "bold" },
+  color = { fg = colors.fg, gui = "bold" },
 })
 
 -- ins_right({

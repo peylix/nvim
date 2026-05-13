@@ -136,7 +136,7 @@ local function yank_entire_buffer()
   vim.notify(("Yanked %d lines"):format(lines))
 end
 
-map("n", "<leader>oy", yank_entire_buffer, {
+map("n", "<leader>by", yank_entire_buffer, {
   desc = "Yank entire buffer",
 })
 
