@@ -2,7 +2,7 @@ local map = vim.keymap.set
 local add = vim.pack.add
 
 -- neogit
-local function neogit_config(fn)
+local function neogit(fn)
   return function()
     add({
       Config.gh("folke/snacks.nvim"),
@@ -24,7 +24,7 @@ end
 map(
   "n",
   "<leader>gg",
-  neogit_config(function()
+  neogit(function()
     require("neogit").open({ kind = "split" })
   end),
   { desc = "Show Neogit UI" }

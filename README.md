@@ -5,21 +5,21 @@ My personal Neovim config.
 ## Dependencies
 
 1. Neovim 0.12+ (required by `vim.pack`, `ui2`, etc.)
-2. Git
-3. curl
-4. ripgrep
-5. Node.js & npm
-6. Tree-sitter CLI
-7. Nerd Font (for icons)
-8. xclip (for clipboard support on Linux)
-9. macism (for `im-select.nvim` on macOS)
+2. `git`
+3. `curl`
+4. `ripgrep`
+5. Tree-sitter CLI
+6. Nerd Font (for icons)
+7. Package managers like `npm`, `cargo`, etc. (for LSPs)
+8. macism (for `im-select.nvim` on macOS)
+9. xclip (for clipboard support on Linux)
 
 ## Reduced Profile
 
 To start nvim with reduced config, run:
 
 ```shell
-export PNVIM_PROFILE=reduced  # for bash/zsh
+export PNVIM_PROFILE=reduced  # for bash/zsh, or
 set -gx PNVIM_PROFILE reduced  # for fish
 ```
 

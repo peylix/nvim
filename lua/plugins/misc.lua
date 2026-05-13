@@ -40,7 +40,7 @@ map("n", "[\\", function()
   require("buffer_manager.ui").nav_prev()
 end, { desc = "Previous buffer in buffer manager list" })
 
----- Navigate buffers bypassing the menu
+-- Navigate buffers bypassing the menu
 local keys = "1234567890"
 for i = 1, #keys do
   local key = keys:sub(i, i)
@@ -49,7 +49,7 @@ for i = 1, #keys do
   end, { desc = "Go to the file with target number" })
 end
 
----- Open menu and search
+-- Open menu and search
 map("n", "<leader>bs", function()
   require("buffer_manager.ui").toggle_quick_menu()
   -- wait for the menu to open
