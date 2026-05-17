@@ -1,3 +1,5 @@
+local autocmd = vim.api.nvim_create_autocmd
+
 vim.pack.add({
   Config.gh("yorumicolors/yorumi.nvim"),
   Config.gh("EdenEast/nightfox.nvim"),
@@ -18,13 +20,13 @@ local function reset_termbg()
   vim.api.nvim_ui_send("\027]111\027\\")
 end
 
-vim.api.nvim_create_autocmd({ "ColorScheme", "VimResume" }, {
+autocmd({ "ColorScheme", "VimResume" }, {
   group = Config.augr,
   pattern = "*",
   callback = sync_termbg,
   desc = "Sync terminal bg with colorscheme",
 })
-vim.api.nvim_create_autocmd({ "VimLeavePre", "VimSuspend" }, {
+autocmd({ "VimLeavePre", "VimSuspend" }, {
   group = Config.augr,
   pattern = "*",
   callback = reset_termbg,

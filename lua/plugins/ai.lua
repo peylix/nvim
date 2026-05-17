@@ -5,6 +5,7 @@ local add = vim.pack.add
 local autocmd = vim.api.nvim_create_autocmd
 
 -- copilot.lua
+-- load it on demand
 add({
   Config.gh("copilotlsp-nvim/copilot-lsp"),
   Config.gh("zbirenbaum/copilot.lua"),
