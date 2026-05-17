@@ -8,40 +8,47 @@ local autocmd = vim.api.nvim_create_autocmd
 add({
   Config.gh("copilotlsp-nvim/copilot-lsp"),
   Config.gh("zbirenbaum/copilot.lua"),
-})
+}, { load = function() end })
 
-require("copilot").setup({
-  suggestion = {
-    enabled = not vim.g.ai_cmp,
-    auto_trigger = true,
-    hide_during_completion = vim.g.ai_cmp,
-    keymap = {
-      accept = "<M-l>", -- handled by nvim-cmp / blink.cmp
-      next = "<M-]>",
-      prev = "<M-[>",
-    },
-  },
-  panel = { enabled = false },
-  filetypes = {
-    markdown = true,
-    help = true,
-  },
-  disable_limit_reached_message = true,
-})
-
-autocmd("User", {
+autocmd("SourcePost", {
   group = Config.augr,
-  pattern = "BlinkCmpMenuOpen",
+  pattern = "*/copilot.lua/plugin/*",
+  once = true,
   callback = function()
-    vim.b.copilot_suggestion_hidden = true
-  end,
-})
+    require("copilot").setup({
+      suggestion = {
+        enabled = not vim.g.ai_cmp,
+        auto_trigger = true,
+        hide_during_completion = vim.g.ai_cmp,
+        keymap = {
+          accept = "<M-l>", -- handled by nvim-cmp / blink.cmp
+          next = "<M-]>",
+          prev = "<M-[>",
+        },
+      },
+      panel = { enabled = false },
+      filetypes = {
+        markdown = true,
+        help = true,
+      },
+      disable_limit_reached_message = true,
+    })
 
-autocmd("User", {
-  group = Config.augr,
-  pattern = "BlinkCmpMenuClose",
-  callback = function()
-    vim.b.copilot_suggestion_hidden = false
+    autocmd("User", {
+      group = Config.augr,
+      pattern = "BlinkCmpMenuOpen",
+      callback = function()
+        vim.b.copilot_suggestion_hidden = true
+      end,
+    })
+
+    autocmd("User", {
+      group = Config.augr,
+      pattern = "BlinkCmpMenuClose",
+      callback = function()
+        vim.b.copilot_suggestion_hidden = false
+      end,
+    })
   end,
 })
 
