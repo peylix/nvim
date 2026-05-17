@@ -146,6 +146,21 @@ require("conform").setup({
   },
 })
 
+-- render-markdown.nvim
+autocmd("FileType", {
+  group = Config.augr,
+  pattern = "markdown",
+  once = true,
+  callback = function()
+    add({
+      Config.gh("nvim-treesitter/nvim-treesitter"),
+      Config.gh("nvim-mini/mini.nvim"),
+      Config.gh("MeanderingProgrammer/render-markdown.nvim"),
+    })
+    require("render-markdown").setup({})
+  end,
+})
+
 if not Config.profile_is_reduced then
   -- VimTex
   autocmd("FileType", {

@@ -373,14 +373,6 @@ map("n", "gM", "<CMD>Glance implementations<CR>")
 add({ Config.gh("mvllow/modes.nvim") })
 require("modes").setup()
 
--- render-markdown.nvim
-add({
-  Config.gh("nvim-treesitter/nvim-treesitter"),
-  Config.gh("nvim-mini/mini.nvim"),
-  Config.gh("MeanderingProgrammer/render-markdown.nvim"),
-})
-require("render-markdown").setup({})
-
 -- todo-comments.nvim
 add({
   Config.gh("nvim-lua/plenary.nvim"),
