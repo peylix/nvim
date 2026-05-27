@@ -172,6 +172,10 @@ require("mini.starter").setup({
   footer = "Have a nice day!",
 })
 
+map("n", "<leader>S", function()
+  MiniStarter.open()
+end, {desc = "Toggle starter page"})
+
 -- ensure mini.clue is available on mini.starter
 autocmd("User", {
   pattern = "MiniStarterOpened",
