@@ -74,6 +74,7 @@ o.virtualedit = "block"
 
 o.iskeyword = "@,48-57,_,192-255,-" -- treat dash as `word` textobject part
 
+-- Others
 -- use system clipboard
 -- put this after `UiEnter` to reduce start up time
 vim.schedule(function()
@@ -85,3 +86,12 @@ if vim.fn.has("linux") == 1 then vim.g.clipboard = "xclip" end
 
 -- use ~/.config/spell/en.utf-8.add
 o.spellfile = vim.fn.stdpath("config") .. "/spell/en.utf-8.add"
+
+-- disable some plugins
+g.loaded_netrw = 1
+g.loaded_netrwPlugin = 1
+g.loaded_gzip = 1
+g.loaded_tar = 1
+g.loaded_tarPlugin = 1
+g.loaded_zip = 1
+g.loaded_zipPlugin = 1
