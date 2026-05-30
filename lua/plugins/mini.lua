@@ -174,7 +174,7 @@ require("mini.starter").setup({
 
 map("n", "<leader>S", function()
   MiniStarter.open()
-end, {desc = "Toggle starter page"})
+end, { desc = "Toggle starter page" })
 
 -- ensure mini.clue is available on mini.starter
 autocmd("User", {
@@ -204,3 +204,22 @@ map("n", "<leader>sn", "<cmd>lua " .. session_new .. "<CR>", { desc = "New" })
 map("n", "<leader>sr", '<cmd>lua MiniSessions.select("read")<CR>', { desc = "Read" })
 map("n", "<leader>sR", "<cmd>lua MiniSessions.restart()<CR>", { desc = "Restart" })
 map("n", "<leader>sw", "<cmd>lua MiniSessions.write()<CR>", { desc = "Write current" })
+
+-- mini.snippets
+local latex_patterns = { "latex/**/*.json", "**/latex.json" }
+local lang_patterns = {
+  tex = latex_patterns,
+  plaintex = latex_patterns,
+  markdown_inline = { "markdown.json" },
+}
+local gen_loader = require("mini.snippets").gen_loader
+require("mini.snippets").setup({
+  snippets = {
+    -- Load custom file with global snippets first
+    gen_loader.from_file("~/.config/nvim/snippets/global.json"),
+
+    -- Load snippets based on current language by reading files from
+    -- "snippets/" subdirectories from 'runtimepath' directories.
+    gen_loader.from_lang({ lang_patterns = lang_patterns }),
+  },
+})
