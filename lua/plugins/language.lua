@@ -118,6 +118,7 @@ vim.lsp.enable({
   "html",
   "ts_ls",
   "markdown_oxide",
+  "jsonls",
 })
 
 vim.lsp.codelens.enable(true) -- enable codelens
