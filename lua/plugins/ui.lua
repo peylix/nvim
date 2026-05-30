@@ -197,6 +197,13 @@ ins_left({
   },
 })
 
+ins_left({
+  function()
+    return vim.w.numb_peeking and "peek" or ""
+  end,
+  color = { fg = colors.red, gui = "italic" },
+})
+
 -- Insert mid section
 -- for lualine it's any number greater then 2
 ins_left({
@@ -359,7 +366,6 @@ require("comfy-line-numbers").setup({
 
 -- numb.nvim
 add({ Config.gh("nacro90/numb.nvim") })
-require("numb").setup()
 
 -- glance.nvim
 add({ Config.gh("dnlhc/glance.nvim") })
