@@ -144,12 +144,18 @@ map("n", "<leader>by", yank_entire_buffer, {
 map("n", "<leader>w", "<cmd>w<CR>", { desc = "Save the buffer" })
 map("n", "<leader>W", "<cmd>wa<CR>", { desc = "Save all buffers" })
 
--- Toggle quickfix/localfix list
+-- Toggle quickfix/location list
 map("n", "<leader>oq", function()
   vim.cmd(vim.fn.getqflist({ winid = true }).winid ~= 0 and "cclose" or "copen")
 end, { desc = "Quickfix list" })
 map("n", "<leader>ol", function()
-  vim.cmd(vim.fn.getloclist(0, { winid = true }).winid ~= 0 and "lclose" or "lopen")
+  if vim.fn.getloclist(0, { winid = true }).winid ~= 0 then
+    vim.cmd("lclose")
+  else
+    -- avoid error if location list is not populated
+    local ok, err = pcall(vim.cmd, "lopen")
+    if not ok then vim.notify("No location list for this window", vim.log.levels.INFO) end
+  end
 end, { desc = "Location list" })
 
 -- Language related
