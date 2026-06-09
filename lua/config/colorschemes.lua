@@ -1,5 +1,8 @@
 local autocmd = vim.api.nvim_create_autocmd
 
+-- set background
+vim.o.background = "dark"
+
 vim.pack.add({
   Config.gh("yorumicolors/yorumi.nvim"),
   Config.gh("EdenEast/nightfox.nvim"),
