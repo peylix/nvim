@@ -38,7 +38,7 @@ map("v", "<Tab>", ">gv", { silent = true, desc = "Indent selection" })
 map("v", "<S-Tab>", "<gv", { silent = true, desc = "Outdent selection" })
 
 -- Close buffer
-map("n", "<leader>c", "<cmd>bdelete<CR>", { silent = true, desc = "Close buffer" })
+-- map("n", "<leader>c", "<cmd>bdelete<CR>", { silent = true, desc = "Close buffer" })
 
 -- Hide window
 map("n", "<leader>h", "<cmd>hide<CR>", { silent = true, desc = "Hide window" })

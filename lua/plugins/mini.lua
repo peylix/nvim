@@ -223,3 +223,11 @@ require("mini.snippets").setup({
     gen_loader.from_lang({ lang_patterns = lang_patterns }),
   },
 })
+
+-- mini.bufremove
+require("mini.bufremove").setup()
+
+-- Close buffer
+map("n", "<leader>c", function()
+  MiniBufremove.delete()
+end, { silent = true, desc = "Close buffer" })
