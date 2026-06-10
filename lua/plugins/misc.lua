@@ -77,3 +77,7 @@ end
 
 -- vim-startuptime
 add({ Config.gh("dstein64/vim-startuptime") })
+
+-- hexinspector.nvim
+-- load it on demand
+add({ Config.gh("Punity122333/hexinspector.nvim") }, { load = function() end })
