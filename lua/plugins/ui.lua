@@ -12,7 +12,7 @@ local lualine = require("lualine")
 
 -- Color table for highlights
 -- stylua: ignore
-local colors = {
+local dark_colors = {
   bg = "#070c30",
   fg = "#bbc2cf",
   white = "#ffffff",
@@ -27,6 +27,24 @@ local colors = {
   blue = "#51afef",
   red = "#ff3d48",
 }
+
+local light_colors = {
+  fg = "#1c2233",
+  bg = "#e3e5ec",
+  white = "#ffffff",
+  yellow = "#9a6b00",
+  cyan = "#007070",
+  darkblue = "#cfd4e0",
+  light_cyan = "#2f7d76",
+  green = "#1f8a45",
+  orange = "#c25a00",
+  violet = "#6849c4",
+  magenta = "#a83fb8",
+  blue = "#1f64c4",
+  red = "#cc2233",
+}
+
+local colors = vim.o.background == "light" and light_colors or dark_colors
 
 local conditions = {
   buffer_not_empty = function()
@@ -47,10 +65,10 @@ local config = {
     -- Disable sections and component separators
     component_separators = "",
     section_separators = "",
-    theme = {
-      normal = { c = { fg = colors.fg, bg = colors.bg } },
-      inactive = { c = { fg = colors.fg, bg = colors.bg } },
-    },
+    -- theme = {
+    --   normal = { c = { fg = colors.fg, bg = colors.bg } },
+    --   inactive = { c = { fg = colors.fg, bg = colors.bg } },
+    -- },
   },
   sections = {
     -- these are to remove the defaults
@@ -69,7 +87,8 @@ local config = {
       {
         "filename",
         cond = conditions.buffer_not_empty,
-        color = { fg = colors.blue, gui = "bold" },
+        -- color = { fg = colors.blue, gui = "bold" },
+        color = { gui = "bold" },
       },
       { "location" },
     },
@@ -78,7 +97,8 @@ local config = {
         "o:encoding",
         fmt = string.upper,
         cond = conditions.hide_in_width,
-        color = { fg = colors.fg, gui = "bold" },
+        -- color = { fg = colors.fg, gui = "bold" },
+        color = { gui = "bold" },
       },
     },
     lualine_y = {},
@@ -161,12 +181,6 @@ ins_left({
   padding = { left = 1, right = 1 },
 })
 
--- ins_left({
---   -- filesize component
---   "filesize",
---   cond = conditions.buffer_not_empty,
--- })
-
 ins_left({
   function()
     local reg = vim.fn.reg_recording()
@@ -179,22 +193,27 @@ ins_left({
 ins_left({
   "filename",
   cond = conditions.buffer_not_empty,
-  color = { fg = colors.blue, gui = "bold" },
+  -- color = { fg = colors.blue, gui = "bold" },
+  color = { gui = "italic,bold" },
 })
 
 ins_left({ "location" })
 
-ins_left({ "progress", color = { fg = colors.fg, gui = "bold" } })
+ins_left({
+  "progress",
+  -- color = { fg = colors.fg, gui = "bold" }
+  color = { gui = "bold" },
+})
 
 ins_left({
   "diagnostics",
   sources = { "nvim_diagnostic" },
   symbols = { error = " ", warn = " ", info = " " },
-  diagnostics_color = {
-    error = { fg = colors.red },
-    warn = { fg = colors.yellow },
-    info = { fg = colors.cyan },
-  },
+  -- diagnostics_color = {
+  --   error = { fg = colors.red },
+  --   warn = { fg = colors.yellow },
+  --   info = { fg = colors.cyan },
+  -- },
 })
 
 ins_left({
@@ -226,7 +245,8 @@ ins_left({
     return msg
   end,
   icon = " ",
-  color = { fg = colors.white, gui = "bold" },
+  -- color = { fg = colors.white, gui = "bold" },
+  color = { gui = "bold" },
 })
 
 ins_right({
@@ -244,30 +264,25 @@ ins_right({
   "o:encoding",
   fmt = string.upper,
   cond = conditions.hide_in_width,
-  color = { fg = colors.fg, gui = "bold" },
+  -- color = { fg = colors.fg, gui = "bold" },
+  color = { gui = "bold" },
 })
-
--- ins_right({
---   "fileformat",
---   fmt = string.upper,
---   icons_enabled = false,
---   color = { fg = colors.light_cyan, gui = "bold" },
--- })
 
 ins_right({
   "branch",
   icon = "",
-  color = { fg = colors.violet, gui = "bold" },
+  -- color = { fg = colors.violet, gui = "bold" },
+  color = { gui = "bold" },
 })
 
 ins_right({
   "diff",
   symbols = { added = " ", modified = "󰝤 ", removed = " " },
-  diff_color = {
-    added = { fg = colors.green },
-    modified = { fg = colors.orange },
-    removed = { fg = colors.red },
-  },
+  -- diff_color = {
+  --   added = { fg = colors.green },
+  --   modified = { fg = colors.orange },
+  --   removed = { fg = colors.red },
+  -- },
   cond = conditions.hide_in_width,
   padding = { right = 1 },
 })
@@ -377,7 +392,11 @@ map("n", "gM", "<CMD>Glance implementations<CR>")
 
 -- modes.nvim
 add({ Config.gh("mvllow/modes.nvim") })
-require("modes").setup()
+require("modes").setup({
+  set_cursor = false,
+  -- set_number = false,
+  set_signcolumn = false,
+})
 
 -- todo-comments.nvim
 add({
