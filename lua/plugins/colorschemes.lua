@@ -1,7 +1,7 @@
 local autocmd = vim.api.nvim_create_autocmd
 
 -- set background
-vim.o.background = "dark"
+vim.o.background = "light"
 
 vim.pack.add({
   Config.gh("yorumicolors/yorumi.nvim"),
@@ -9,7 +9,7 @@ vim.pack.add({
 })
 
 -- use yorumi colorscheme
-vim.cmd.colorscheme("yorumi")
+vim.cmd.colorscheme("dayfox")
 
 -- Sync the terminal background with the current colorscheme with nvim_ui_send()
 local function sync_termbg()

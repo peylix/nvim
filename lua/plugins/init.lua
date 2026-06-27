@@ -1,6 +1,7 @@
 if not vim.g.vscode then
   require("plugins.language")
   require("plugins.mini")
+  require("plugins.colorschemes")
   require("plugins.snacks")
   require("plugins.editing")
   require("plugins.ui")
