@@ -119,28 +119,28 @@ end
 ins_left({
   function()
     local mode_map = {
-      n = "NO", -- Normal mode
-      no = "OP", -- Operator-pending mode
-      nov = "OP",
-      noV = "OP",
-      ["no\22"] = "OP",
+      n = "NOR", -- Normal mode
+      no = "NOR", -- Operator-pending mode
+      nov = "NOr",
+      noV = "NOv",
+      ["no\22"] = "NO?",
 
-      i = "IN", -- Insert mode
+      i = "INS", -- Insert mode
 
-      v = "VI", -- Visual charactor mode
-      V = "VL", -- Visual line mode
-      [""] = "VB", -- Visual block mode
+      v = "VIS", -- Visual charactor mode
+      V = "VIl", -- Visual line mode
+      [""] = "VIb", -- Visual block mode
 
-      c = "CM", -- Command-line mode
+      c = "CMD", -- Command-line mode
 
-      R = "RE", -- Replace mode
-      Rv = "VR", -- Virtual replace
+      R = "REP", -- Replace mode
+      Rv = "REv", -- Virtual replace
 
-      s = "SE", -- Select mode
-      S = "SL", -- Select line mode
-      [""] = "SB", -- Select block mode
+      s = "SEL", -- Select mode
+      S = "SEl", -- Select line mode
+      [""] = "SEb", -- Select block mode
 
-      t = "TE", -- Terminal mode
+      t = "TER", -- Terminal mode
     }
 
     return mode_map[vim.fn.mode()] or "?"
