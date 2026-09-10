@@ -44,13 +44,15 @@ snacks.setup({
       enabled = false,
     },
     chunk = {
-      enabled = false,
+      enabled = true,
     },
   },
   bigfile = {
     enabled = true,
   },
 })
+
+-- Keymaps
 
 -- Resume previous search
 map("n", "<leader>f<CR>", function()
@@ -64,7 +66,7 @@ end, { desc = "Marks" })
 
 -- Search config files
 map("n", "<leader>fa", function()
-  Snacks.picker.files({ cwd = vim.fn.stdpath("config") })
+  Snacks.picker.files({ cwd = vim.fn.stdpath("config"), confirm = "edit_tab" })
 end, { desc = "Find config files" })
 
 -- Buffers
@@ -207,26 +209,32 @@ map("n", "<leader>lG", function()
   Snacks.picker.lsp_workspace_symbols()
 end, { desc = "LSP Workspace Symbols" })
 
+-- GitHub Issues (open)
 map("n", "<leader>gi", function()
   Snacks.picker.gh_issue()
 end, { desc = "GitHub Issues (open)" })
 
+-- GitHub Issues (all)
 map("n", "<leader>gI", function()
   Snacks.picker.gh_issue({ state = "all" })
 end, { desc = "GitHub Issues (all)" })
 
+-- GitHub Pull Requests (open)
 map("n", "<leader>gq", function()
   Snacks.picker.gh_pr()
 end, { desc = "GitHub Pull Requests (open)" })
 
+-- GitHub Pull Requests (all)
 map("n", "<leader>gQ", function()
   Snacks.picker.gh_pr({ state = "all" })
 end, { desc = "GitHub Pull Requests (all)" })
 
+-- Toggle Scratch Buffer
 map("n", "<leader>ba", function()
   Snacks.scratch()
 end, { desc = "Toggle Scratch Buffer" })
 
+-- Select Scratch Buffer
 map("n", "<leader>bA", function()
   Snacks.scratch.select()
 end, { desc = "Select Scratch Buffer" })
