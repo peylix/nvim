@@ -23,11 +23,11 @@ require("mini.files").setup({
   },
 })
 
-map("n", "<leader>ed", function()
+map("n", "<leader>E", function()
   MiniFiles.open()
-end, { desc = "Working directory" })
+end, { desc = "Explore (working dir)" })
 
-map("n", "<leader>ee", function()
+map("n", "<leader>e", function()
   local this_buffer = vim.api.nvim_buf_get_name(0)
   -- Open the working directory if current buffer does not start with a file path
   if not vim.startswith(this_buffer, "/") then
@@ -35,7 +35,7 @@ map("n", "<leader>ee", function()
     return
   end
   MiniFiles.open(this_buffer)
-end, { desc = "Current file" })
+end, { desc = "Explore" })
 
 autocmd("User", {
   pattern = "MiniFilesBufferCreate",
@@ -202,7 +202,6 @@ local session_new = 'vim.ui.input({ prompt = "Session name: " }, MiniSessions.wr
 map("n", "<leader>sd", '<cmd>lua MiniSessions.select("delete")<CR>', { desc = "Delete" })
 map("n", "<leader>sn", "<cmd>lua " .. session_new .. "<CR>", { desc = "New" })
 map("n", "<leader>sr", '<cmd>lua MiniSessions.select("read")<CR>', { desc = "Read" })
-map("n", "<leader>sR", "<cmd>lua MiniSessions.restart()<CR>", { desc = "Restart" })
 map("n", "<leader>sw", "<cmd>lua MiniSessions.write()<CR>", { desc = "Write current" })
 
 -- mini.snippets

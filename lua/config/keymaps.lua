@@ -123,9 +123,6 @@ map("n", "<leader>tr", function()
   end)
 end, { desc = "Rename this terminal" })
 
--- Restart Neovim
-map("n", "<leader>or", "<cmd>restart<CR>", { silent = true, desc = "Restart Neovim" })
-
 -- Create new tab
 map("n", "<leader>bT", "<cmd>tabnew<CR>", { desc = "New tab" })
 
