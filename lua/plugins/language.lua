@@ -109,7 +109,7 @@ vim.diagnostic.config({
 })
 
 vim.lsp.enable({
-  "basedpyright",
+  "ty",
   "lua_ls",
   "clangd",
   "tinymist",
