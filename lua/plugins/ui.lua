@@ -269,6 +269,15 @@ ins_right({
 })
 
 ins_right({
+  "fileformat",
+  fmt = string.upper,
+  icons_enabled = false,
+  -- show this only when the file format is not UNIX
+  cond = function() return vim.bo.fileformat ~= "unix" end,
+  color = { fg = colors.red, gui = "bold" },
+})
+
+ins_right({
   "branch",
   icon = "",
   -- color = { fg = colors.violet, gui = "bold" },

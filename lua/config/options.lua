@@ -46,6 +46,7 @@ o.titlestring = '%{fnamemodify(getcwd(),":t")}' -- set the title to current work
 o.list = true -- show whitespace characters
 
 opt.listchars = {
+  tab = "  ",
   nbsp = "␣", -- show non-breaking spaces as ␣
   -- trail = '•', -- show trailing spaces as •
   extends = "⟩", -- when line content exceeds right boundary, show ⟩
@@ -82,7 +83,7 @@ vim.schedule(function()
 end)
 
 -- use xclip for clipboard on Linux
-if vim.fn.has("linux") == 1 then vim.g.clipboard = "xclip" end
+if vim.fn.has("linux") == 1 then g.clipboard = "xclip" end
 
 -- use ~/.config/spell/en.utf-8.add
 o.spellfile = vim.fn.stdpath("config") .. "/spell/en.utf-8.add"
