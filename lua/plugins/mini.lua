@@ -157,6 +157,7 @@ miniclue.setup({
   },
 })
 
+-- mini.starter
 require("mini.starter").setup({
   header = table.concat({
     "▗▄▄▖ ▗▄▄▄▖▗▖  ▗▖▗▖   ▗▄▄▄▖▗▖  ▗▖",
@@ -230,3 +231,6 @@ require("mini.bufremove").setup()
 map("n", "<leader>c", function()
   MiniBufremove.delete()
 end, { silent = true, desc = "Close buffer" })
+
+-- mini.notify
+require('mini.notify').setup()
