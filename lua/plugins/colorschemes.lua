@@ -4,12 +4,18 @@ local autocmd = vim.api.nvim_create_autocmd
 vim.o.background = "light"
 
 vim.pack.add({
-  Config.gh("yorumicolors/yorumi.nvim"),
-  Config.gh("EdenEast/nightfox.nvim"),
+  Config.gh("oskarnurm/koda.nvim"),
 })
 
--- use yorumi colorscheme
-vim.cmd.colorscheme("dayfox")
+require("koda").setup({
+  theme={
+    dark="moss",
+    light="light"
+  },
+})
+
+-- set the colorscheme
+vim.cmd.colorscheme("koda")
 
 -- Sync the terminal background with the current colorscheme with nvim_ui_send()
 local function sync_termbg()

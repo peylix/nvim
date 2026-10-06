@@ -37,6 +37,8 @@ o.wrap = false -- do not visually wrap lines
 o.cmdheight = 0
 o.laststatus = 2
 
+o.termguicolors = true
+
 o.cursorlineopt = "screenline,number" -- show cursor line per screen line
 
 o.title = true -- Enable titles

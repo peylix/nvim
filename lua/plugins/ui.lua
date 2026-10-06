@@ -273,7 +273,9 @@ ins_right({
   fmt = string.upper,
   icons_enabled = false,
   -- show this only when the file format is not UNIX
-  cond = function() return vim.bo.fileformat ~= "unix" end,
+  cond = function()
+    return vim.bo.fileformat ~= "unix"
+  end,
   color = { fg = colors.red, gui = "bold" },
 })
 
@@ -402,9 +404,19 @@ map("n", "gM", "<CMD>Glance implementations<CR>")
 -- modes.nvim
 add({ Config.gh("mvllow/modes.nvim") })
 require("modes").setup({
-  set_cursor = false,
+  -- colors = {
+  --   copy = "#f5c359",
+  --   delete = "#c75c6a",
+  --   change = "#c75c6a", -- Optional param, defaults to delete
+  --   format = "#c79585",
+  --   insert = "#78ccc5",
+  --   replace = "#245361",
+  --   select = "#9745be", -- Optional param, defaults to visual
+  --   visual = "#9745be",
+  -- },
+  -- set_cursor = false,
   -- set_number = false,
-  set_signcolumn = false,
+  -- set_signcolumn = false,
 })
 
 -- todo-comments.nvim
