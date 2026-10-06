@@ -3,6 +3,7 @@ if Config.profile_is_reduced then return {} end
 local map = vim.keymap.set
 local add = vim.pack.add
 local autocmd = vim.api.nvim_create_autocmd
+local usercmd = vim.api.nvim_create_user_command
 
 -- copilot.lua
 -- load it on demand
@@ -10,6 +11,11 @@ add({
   Config.gh("copilotlsp-nvim/copilot-lsp"),
   Config.gh("zbirenbaum/copilot.lua"),
 }, { load = function() end })
+
+usercmd("LoadCopilot", function ()
+  vim.cmd.packadd("copilot-lsp")
+  vim.cmd.packadd("copilot.lua")
+end, { desc = "Load GitHub Copilot" })
 
 autocmd("SourcePost", {
   group = Config.augr,
