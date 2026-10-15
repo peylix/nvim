@@ -396,10 +396,10 @@ add({ Config.gh("nacro90/numb.nvim") })
 -- glance.nvim
 add({ Config.gh("dnlhc/glance.nvim") })
 require("glance").setup()
-map("n", "gD", "<CMD>Glance definitions<CR>")
-map("n", "gR", "<CMD>Glance references<CR>")
-map("n", "gY", "<CMD>Glance type_definitions<CR>")
-map("n", "gM", "<CMD>Glance implementations<CR>")
+map("n", "gD", "<CMD>Glance definitions<CR>", { desc = "Glance definitions" })
+map("n", "gR", "<CMD>Glance references<CR>", { desc = "Glance references" })
+map("n", "gY", "<CMD>Glance type_definitions<CR>", { desc = "Glance type definitions" })
+map("n", "gM", "<CMD>Glance implementations<CR>", { desc = "Glance implementations" })
 
 -- modes.nvim
 add({ Config.gh("mvllow/modes.nvim") })
