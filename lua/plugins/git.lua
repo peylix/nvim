@@ -2,33 +2,30 @@ local map = vim.keymap.set
 local add = vim.pack.add
 
 -- neogit
-local function neogit(fn)
-  return function()
-    add({
-      Config.gh("folke/snacks.nvim"),
-      Config.gh("neogitorg/neogit"),
-    })
+-- load it on demand
+add({
+  Config.gh("folke/snacks.nvim"),
+  Config.gh("neogitorg/neogit"),
+}, { load = function() end })
 
-    require("neogit").setup({
-      disable_line_numbers = false,
-      disable_relative_line_numbers = false,
-      graph_style = "kitty",
-      commit_view = {
-        kind = "auto",
-      },
-    })
-    fn()
-  end
+local function load_neogit()
+  vim.cmd.packadd("snacks.nvim")
+  vim.cmd.packadd("neogit")
+
+  require("neogit").setup({
+    disable_line_numbers = false,
+    disable_relative_line_numbers = false,
+    graph_style = "kitty",
+    commit_view = {
+      kind = "auto",
+    },
+  })
 end
 
-map(
-  "n",
-  "<leader>gg",
-  neogit(function()
-    require("neogit").open({ kind = "split" })
-  end),
-  { desc = "Show Neogit UI" }
-)
+map("n", "<leader>gg", function()
+  load_neogit()
+  require("neogit").open({ kind = "split" })
+end, { desc = "Show Neogit UI" })
 
 -- gitsigns.nvim
 add({ Config.gh("lewis6991/gitsigns.nvim") })
