@@ -25,6 +25,9 @@ local ts_parser_default = {
   "bash",
   "json",
   "comment",
+  "markdown",
+  "markdown_inline",
+  "mermaid",
 }
 
 local ts_parser_reduced = {
@@ -33,6 +36,8 @@ local ts_parser_reduced = {
   "bash",
   "json",
   "comment",
+  "markdown",
+  "markdown_inline",
 }
 
 -- get filetype names from treesitter parser names
@@ -116,7 +121,6 @@ vim.lsp.enable({
   "cssls",
   "html",
   "ts_ls",
-  "markdown_oxide",
   "jsonls",
 })
 
@@ -146,6 +150,11 @@ require("conform").setup({
   },
 })
 
+-- Keymap for formatting
+map("n", "<leader>lf", function()
+  require("conform").format({ async = true })
+end, { desc = "Format this buffer" })
+
 -- render-markdown.nvim
 autocmd("FileType", {
   group = Config.augr,
@@ -157,7 +166,7 @@ autocmd("FileType", {
       Config.gh("nvim-mini/mini.nvim"),
       Config.gh("MeanderingProgrammer/render-markdown.nvim"),
     })
-    require("render-markdown").setup({})
+    require("render-markdown").setup()
   end,
 })
 
