@@ -12,7 +12,7 @@ add({
   Config.gh("zbirenbaum/copilot.lua"),
 }, { load = function() end })
 
-usercmd("LoadCopilot", function ()
+usercmd("LoadCopilot", function()
   vim.cmd.packadd("copilot-lsp")
   vim.cmd.packadd("copilot.lua")
 end, { desc = "Load GitHub Copilot" })

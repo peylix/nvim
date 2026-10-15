@@ -233,4 +233,4 @@ map("n", "<leader>c", function()
 end, { silent = true, desc = "Close buffer" })
 
 -- mini.notify
-require('mini.notify').setup()
+require("mini.notify").setup()

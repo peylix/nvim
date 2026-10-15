@@ -8,9 +8,9 @@ vim.pack.add({
 })
 
 require("koda").setup({
-  theme={
-    dark="moss",
-    light="light"
+  theme = {
+    dark = "moss",
+    light = "light",
   },
 })
 

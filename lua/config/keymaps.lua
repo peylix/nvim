@@ -156,10 +156,6 @@ map("n", "<leader>ol", function()
 end, { desc = "Location list" })
 
 -- Language related
-map("n", "<leader>lf", function()
-  require("conform").format({ async = true, lsp_fallback = true })
-end, { desc = "Format this buffer" })
-
 vim.api.nvim_create_autocmd("LspAttach", {
   group = Config.augr,
   callback = function(args)
@@ -167,3 +163,67 @@ vim.api.nvim_create_autocmd("LspAttach", {
     map("n", "<leader>lr", vim.lsp.buf.rename, opts)
   end,
 })
+
+-- Format the entire project
+local project_formatters = {
+  stylua = { "stylua", "." },
+  ruff = { "ruff", "format", "." },
+}
+
+local project_formatting = false
+
+local function format_entire_project()
+  if project_formatting then
+    return vim.notify("Project formatting already in progress", vim.log.levels.WARN)
+  end
+
+  -- Must be in a git repository to format the entire project to avoid formatting an arbitrary directory
+  local root = vim.fs.root(0, ".git")
+  if not root then return vim.notify("Not in a git repository", vim.log.levels.WARN) end
+
+  local cmds = vim.tbl_filter(function(cmd)
+    return vim.fn.executable(cmd[1]) == 1
+  end, vim.tbl_values(project_formatters))
+  if #cmds == 0 then
+    return vim.notify("No project formatter available", vim.log.levels.WARN)
+  end
+
+  -- Save unsaved changes inside the project only
+  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+    if
+      vim.bo[buf].modified
+      and vim.bo[buf].buftype == ""
+      and vim.fs.relpath(root, vim.api.nvim_buf_get_name(buf))
+    then
+      vim.api.nvim_buf_call(buf, function()
+        vim.cmd("silent! write")
+      end)
+    end
+  end
+
+  project_formatting = true
+  vim.notify("Formatting project: " .. root)
+
+  local pending, failed = #cmds, 0
+  for _, cmd in ipairs(cmds) do
+    vim.system(
+      cmd,
+      { cwd = root },
+      vim.schedule_wrap(function(res)
+        if res.code ~= 0 then
+          failed = failed + 1
+          local msg = vim.trim(res.stderr ~= "" and res.stderr or res.stdout or "")
+          vim.notify(cmd[1] .. " failed:\n" .. msg, vim.log.levels.ERROR)
+        end
+        pending = pending - 1
+        if pending == 0 then
+          project_formatting = false
+          vim.cmd("checktime") -- reload buffers changed on disk
+          if failed == 0 then vim.notify("Project formatted: " .. root) end
+        end
+      end)
+    )
+  end
+end
+
+map("n", "<leader>lF", format_entire_project, { desc = "Format the entire project" })
