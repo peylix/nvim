@@ -1,5 +1,6 @@
 local map = vim.keymap.set
 local add = vim.pack.add
+local autocmd = vim.api.nvim_create_autocmd
 
 -- buffer_manager
 add({
@@ -81,3 +82,15 @@ add({ Config.gh("dstein64/vim-startuptime") })
 -- hexinspector.nvim
 -- load it on demand
 add({ Config.gh("Punity122333/hexinspector.nvim") }, { load = function() end })
+
+-- csvview.nvim
+autocmd("FileType", {
+  group = Config.augr,
+  pattern = "csv",
+  once = true,
+  callback = function(args)
+    add({ Config.gh("hat0uma/csvview.nvim") })
+
+    vim.api.nvim_exec_autocmds("FileType", { pattern = args.match })
+  end,
+})

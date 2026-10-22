@@ -437,14 +437,6 @@ map("n", "[t", function()
   todo_comments.jump_prev()
 end, { desc = "Previous todo comment" })
 
--- fidget.nvim
--- add({ Config.gh("j-hui/fidget.nvim") })
--- require("fidget").setup({
---   notification = {
---     override_vim_notify = true,
---   },
--- })
-
 -- dropbar.nvim
 add({ Config.gh("Bekaboo/dropbar.nvim") })
 
