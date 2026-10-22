@@ -1,4 +1,6 @@
 -- set typescript-react indent to 2 spaces for tabs, shifts, and soft tabs
-vim.bo.tabstop = 2
-vim.bo.shiftwidth = 2
-vim.bo.softtabstop = 2
+local bo = vim.bo
+
+bo.tabstop = 2
+bo.shiftwidth = 2
+bo.softtabstop = 2
