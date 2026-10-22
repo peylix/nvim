@@ -120,7 +120,7 @@ vim.lsp.enable({
   "tinymist",
   "cssls",
   "html",
-  "ts_ls",
+  "tsc",
   "jsonls",
 })
 
@@ -135,6 +135,8 @@ add({ Config.gh("mfussenegger/nvim-lint") })
 require("lint").linters_by_ft = {
   lua = { "selene" },
   python = { "ruff" },
+  javascript = { "oxlint" },
+  typescript = { "oxlint" },
 }
 
 -- conform.nvim
@@ -147,6 +149,11 @@ require("conform").setup({
   formatters_by_ft = {
     lua = { "stylua" },
     python = { "ruff" },
+    javascript = { "oxfmt" },
+    typescript = { "oxfmt" },
+    css = { "oxfmt" },
+    html = { "oxfmt" },
+    json = { "oxfmt" },
   },
 })
 
@@ -176,7 +183,7 @@ if not Config.profile_is_reduced then
     group = Config.augr,
     pattern = { "plaintex", "tex" },
     once = true,
-    callback = function()
+    callback = function(args)
       add({
         Config.gh("lervag/vimtex"),
       })
@@ -187,7 +194,7 @@ if not Config.profile_is_reduced then
         return require("vimtex.snacks").toc()
       end, { desc = "Search in VimTex" })
 
-      vim.api.nvim_exec_autocmds("FileType", { pattern = { "plaintex", "tex" } })
+      vim.api.nvim_exec_autocmds("FileType", { pattern = args.match })
     end,
   })
 
@@ -196,7 +203,7 @@ if not Config.profile_is_reduced then
     group = Config.augr,
     pattern = "typst",
     once = true,
-    callback = function()
+    callback = function(args)
       add({
         {
           src = Config.gh("chomosuke/typst-preview.nvim"),
@@ -207,7 +214,7 @@ if not Config.profile_is_reduced then
       require("typst-preview").setup({
         dependencies_bin = { tinymist = "tinymist" },
       })
-      vim.api.nvim_exec_autocmds("FileType", { pattern = "typst" })
+      vim.api.nvim_exec_autocmds("FileType", { pattern = args.match })
     end,
   })
 end

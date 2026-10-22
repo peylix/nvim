@@ -155,7 +155,7 @@ map("n", "<leader>ol", function()
   end
 end, { desc = "Location list" })
 
--- Language related
+-- Rename symbol
 vim.api.nvim_create_autocmd("LspAttach", {
   group = Config.augr,
   callback = function(args)
@@ -168,6 +168,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 local project_formatters = {
   stylua = { "stylua", "." },
   ruff = { "ruff", "format", "." },
+  oxfmt = { "oxfmt", "--write", "." },
 }
 
 local project_formatting = false
