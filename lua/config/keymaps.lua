@@ -228,3 +228,28 @@ local function format_entire_project()
 end
 
 map("n", "<leader>lF", format_entire_project, { desc = "Format the entire project" })
+
+-- Set current file's directory as the tab's working directory
+map("n", "<leader>oc", function()
+  vim.cmd.tcd("%:p:h")
+  vim.notify(
+    "Working directory for the current tab set to " .. vim.fn.getcwd(),
+    vim.log.levels.INFO
+  )
+end, { desc = "Set working dir (current)" })
+
+-- Set the Git repo root as the tab's working directory
+map("n", "<leader>og", function()
+  local root = vim.fs.root(0, ".git")
+
+  if not root then
+    vim.notify(".git was not found", vim.log.levels.WARN)
+    return
+  end
+
+  vim.cmd.tcd(vim.fn.fnameescape(root))
+  vim.notify(
+    "Working directory for the current tab set to " .. vim.fn.getcwd(),
+    vim.log.levels.INFO
+  )
+end, { desc = "Set working dir (git)" })

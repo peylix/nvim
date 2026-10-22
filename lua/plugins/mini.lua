@@ -115,6 +115,8 @@ Config.leader_group_clues = {
   { mode = "n", keys = "<leader>o", desc = "+Other" },
   { mode = "n", keys = "<leader>s", desc = "+Session" },
   { mode = "n", keys = "<leader>t", desc = "+Terminal" },
+  { mode = "x", keys = "<leader>a", desc = "+AI" },
+  { mode = "x", keys = "<leader>g", desc = "+Git" },
 }
 
 Config.localleader_group_clues = {
